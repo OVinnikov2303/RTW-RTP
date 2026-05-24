@@ -1281,7 +1281,7 @@ async function main() {
     update: {
       images: {
         deleteMany: {},
-        create: [{ url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/1000_hryvnia_2019_front.png/800px-1000_hryvnia_2019_front.png", isPrimary: true, alt: "1000 гривень — купюра НБУ", sortOrder: 0 }],
+        create: [{ url: "https://images.unsplash.com/photo-1555693659-8a5096d6faf5?w=800&q=80", isPrimary: true, alt: "Гривні — банкноти НБУ", sortOrder: 0 }],
       },
     },
     create: {
@@ -1318,8 +1318,8 @@ async function main() {
       images: {
         create: [
           {
-            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/1000_hryvnia_2019_front.png/800px-1000_hryvnia_2019_front.png",
-            alt: "1000 гривень — купюра НБУ",
+            url: "https://images.unsplash.com/photo-1555693659-8a5096d6faf5?w=800&q=80",
+            alt: "Гривні — банкноти НБУ",
             isPrimary: true,
             sortOrder: 0,
           },
