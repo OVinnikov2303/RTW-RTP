@@ -20,45 +20,45 @@ async function main() {
   const [laptops, gamingPcs, components, peripherals] = await Promise.all([
     prisma.category.upsert({
       where: { slug: "laptops" },
-      update: {},
+      update: { image: "https://dlcdnwebimgs.asus.com/gain/87DCDC3E-F5C1-4195-915A-3251D2AB06A1/w1000/h732" },
       create: {
         name: "Laptops",
         slug: "laptops",
         description: "Ultrabooks, gaming laptops, and workstations",
-        image: "https://picsum.photos/seed/laptops/400/300",
+        image: "https://dlcdnwebimgs.asus.com/gain/87DCDC3E-F5C1-4195-915A-3251D2AB06A1/w1000/h732",
         sortOrder: 1,
       },
     }),
     prisma.category.upsert({
       where: { slug: "gaming-pcs" },
-      update: {},
+      update: { image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/desktops/alienware-desktops/alienware-aurora-r16/media-gallery/liquid/desktop-aw-r16-bk-lqd-cooling-gallery-3.psd?fmt=jpeg&wid=800&hei=600&qlt=90" },
       create: {
         name: "Gaming PCs",
         slug: "gaming-pcs",
         description: "Pre-built rigs and custom desktops",
-        image: "https://picsum.photos/seed/gaming/400/300",
+        image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/desktops/alienware-desktops/alienware-aurora-r16/media-gallery/liquid/desktop-aw-r16-bk-lqd-cooling-gallery-3.psd?fmt=jpeg&wid=800&hei=600&qlt=90",
         sortOrder: 2,
       },
     }),
     prisma.category.upsert({
       where: { slug: "components" },
-      update: {},
+      update: { image: "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/rtx-4090/geforce-rtx-4090-product-gallery-thumbnail-267-1.jpg" },
       create: {
         name: "Components",
         slug: "components",
         description: "CPUs, GPUs, RAM, storage and more",
-        image: "https://picsum.photos/seed/components/400/300",
+        image: "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/rtx-4090/geforce-rtx-4090-product-gallery-thumbnail-267-1.jpg",
         sortOrder: 3,
       },
     }),
     prisma.category.upsert({
       where: { slug: "peripherals" },
-      update: {},
+      update: { image: "https://cdn.shopify.com/s/files/1/0059/0630/1017/products/Keychron-Q1-Pro-QMK-VIA-wireless-custom-mechanical-keyboard-knob-75-percent-layout-full-aluminum-white-frame-for-Mac-Windows-Linux-with-RGB-backlight-hot-swappable-K-Pro-switch-red.jpg?v=1689309013" },
       create: {
         name: "Peripherals",
         slug: "peripherals",
         description: "Keyboards, mice, monitors, headsets",
-        image: "https://picsum.photos/seed/peripherals/400/300",
+        image: "https://cdn.shopify.com/s/files/1/0059/0630/1017/products/Keychron-Q1-Pro-QMK-VIA-wireless-custom-mechanical-keyboard-knob-75-percent-layout-full-aluminum-white-frame-for-Mac-Windows-Linux-with-RGB-backlight-hot-swappable-K-Pro-switch-red.jpg?v=1689309013",
         sortOrder: 4,
       },
     }),
@@ -167,7 +167,15 @@ async function main() {
   // Laptops
   const laptop1 = await prisma.product.upsert({
     where: { slug: "macbook-pro-16-m3" },
-    update: {},
+    update: {
+      images: {
+        deleteMany: {},
+        create: [
+          { url: "https://www.apple.com/v/macbook-pro/specs/c/images/specs/16-inch/macbook_pro_16_inch__cqvg4x5ohjv6_large.jpg", isPrimary: true, alt: "MacBook Pro 16 M3 Pro front" },
+          { url: "https://www.apple.com/v/macbook-pro/ax/images/overview/product-viewer/pv_colors_spaceblack__dwfpyrbaf4cy_large.jpg", alt: "MacBook Pro 16 Space Black" },
+        ],
+      },
+    },
     create: {
       name: 'MacBook Pro 16" M3 Pro',
       slug: "macbook-pro-16-m3",
@@ -209,8 +217,8 @@ async function main() {
       },
       images: {
         create: [
-          { url: "https://picsum.photos/seed/mbp16/600/600", isPrimary: true, alt: "MacBook Pro 16 M3 Pro front" },
-          { url: "https://picsum.photos/seed/mbp16b/600/600", alt: "MacBook Pro 16 M3 Pro side" },
+          { url: "https://www.apple.com/v/macbook-pro/specs/c/images/specs/16-inch/macbook_pro_16_inch__cqvg4x5ohjv6_large.jpg", isPrimary: true, alt: "MacBook Pro 16 M3 Pro front" },
+          { url: "https://www.apple.com/v/macbook-pro/ax/images/overview/product-viewer/pv_colors_spaceblack__dwfpyrbaf4cy_large.jpg", alt: "MacBook Pro 16 Space Black" },
         ],
       },
       specs: {
@@ -228,7 +236,12 @@ async function main() {
 
   const laptop2 = await prisma.product.upsert({
     where: { slug: "dell-xps-15-oled" },
-    update: {},
+    update: {
+      images: {
+        deleteMany: {},
+        create: [{ url: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-15-9530/media-gallery/touch-black/notebook-xps-15-9530-t-black-gallery-1.psd?fmt=jpeg&wid=800&hei=600&qlt=90", isPrimary: true, alt: "Dell XPS 15 OLED" }],
+      },
+    },
     create: {
       name: "Dell XPS 15 OLED",
       slug: "dell-xps-15-oled",
@@ -256,7 +269,7 @@ async function main() {
         Battery: { Life: "Up to 13 hours", Capacity: "86Wh" },
       },
       images: {
-        create: [{ url: "https://picsum.photos/seed/xps15/600/600", isPrimary: true, alt: "Dell XPS 15 OLED" }],
+        create: [{ url: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-15-9530/media-gallery/touch-black/notebook-xps-15-9530-t-black-gallery-1.psd?fmt=jpeg&wid=800&hei=600&qlt=90", isPrimary: true, alt: "Dell XPS 15 OLED" }],
       },
       specs: {
         create: [
@@ -272,7 +285,15 @@ async function main() {
 
   const laptop3 = await prisma.product.upsert({
     where: { slug: "asus-rog-zephyrus-g14" },
-    update: {},
+    update: {
+      images: {
+        deleteMany: {},
+        create: [
+          { url: "https://dlcdnwebimgs.asus.com/gain/87DCDC3E-F5C1-4195-915A-3251D2AB06A1/w1000/h732", isPrimary: true, alt: "ASUS ROG Zephyrus G14 front view" },
+          { url: "https://dlcdnwebimgs.asus.com/gain/6D242E91-1127-4073-A046-2692DB8CA2D4/w1000/h732", alt: "ASUS ROG Zephyrus G14 open" },
+        ],
+      },
+    },
     create: {
       name: "ASUS ROG Zephyrus G14",
       slug: "asus-rog-zephyrus-g14",
@@ -303,7 +324,10 @@ async function main() {
         Design: { Weight: "1.65 kg", "AniMe Matrix": true },
       },
       images: {
-        create: [{ url: "https://picsum.photos/seed/rogzeph/600/600", isPrimary: true, alt: "ASUS ROG Zephyrus G14" }],
+        create: [
+          { url: "https://dlcdnwebimgs.asus.com/gain/87DCDC3E-F5C1-4195-915A-3251D2AB06A1/w1000/h732", isPrimary: true, alt: "ASUS ROG Zephyrus G14 front view" },
+          { url: "https://dlcdnwebimgs.asus.com/gain/6D242E91-1127-4073-A046-2692DB8CA2D4/w1000/h732", alt: "ASUS ROG Zephyrus G14 open" },
+        ],
       },
       specs: {
         create: [
@@ -320,7 +344,12 @@ async function main() {
   // Gaming PCs
   const pc1 = await prisma.product.upsert({
     where: { slug: "corsair-one-i300" },
-    update: {},
+    update: {
+      images: {
+        deleteMany: {},
+        create: [{ url: "https://assets.corsair.com/image/upload/c_pad,q_85,h_1100,w_1100,f_auto/products/Systems/CS-9020032-NA/Gallery/CORSAIR_ONE_i300_2022_01.webp", isPrimary: true, alt: "Corsair ONE i300" }],
+      },
+    },
     create: {
       name: "Corsair ONE i300",
       slug: "corsair-one-i300",
@@ -354,7 +383,7 @@ async function main() {
         "Form Factor": { Type: "Mini-ITX", Dimensions: "38 × 17.2 × 27 cm" },
       },
       images: {
-        create: [{ url: "https://picsum.photos/seed/corsairone/600/600", isPrimary: true, alt: "Corsair ONE i300" }],
+        create: [{ url: "https://assets.corsair.com/image/upload/c_pad,q_85,h_1100,w_1100,f_auto/products/Systems/CS-9020032-NA/Gallery/CORSAIR_ONE_i300_2022_01.webp", isPrimary: true, alt: "Corsair ONE i300" }],
       },
       specs: {
         create: [
@@ -370,7 +399,12 @@ async function main() {
 
   await prisma.product.upsert({
     where: { slug: "alienware-aurora-r16" },
-    update: {},
+    update: {
+      images: {
+        deleteMany: {},
+        create: [{ url: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/desktops/alienware-desktops/alienware-aurora-r16/media-gallery/liquid/desktop-aw-r16-bk-lqd-cooling-gallery-3.psd?fmt=jpeg&wid=800&hei=600&qlt=90", isPrimary: true, alt: "Alienware Aurora R16" }],
+      },
+    },
     create: {
       name: "Alienware Aurora R16",
       slug: "alienware-aurora-r16",
@@ -394,7 +428,7 @@ async function main() {
         Chassis: { "Form Factor": "Mid-Tower", RGB: "AlienFX" },
       },
       images: {
-        create: [{ url: "https://picsum.photos/seed/alienware/600/600", isPrimary: true, alt: "Alienware Aurora R16" }],
+        create: [{ url: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/desktops/alienware-desktops/alienware-aurora-r16/media-gallery/liquid/desktop-aw-r16-bk-lqd-cooling-gallery-3.psd?fmt=jpeg&wid=800&hei=600&qlt=90", isPrimary: true, alt: "Alienware Aurora R16" }],
       },
       specs: {
         create: [
@@ -410,7 +444,15 @@ async function main() {
   // Components
   const gpu1 = await prisma.product.upsert({
     where: { slug: "nvidia-rtx-4090" },
-    update: {},
+    update: {
+      images: {
+        deleteMany: {},
+        create: [
+          { url: "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/rtx-4090/geforce-rtx-4090-product-gallery-thumbnail-267-1.jpg", isPrimary: true, alt: "NVIDIA RTX 4090 front" },
+          { url: "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/rtx-4090/geforce-rtx-4090-product-gallery-thumbnail-267-2.jpg", alt: "NVIDIA RTX 4090 side" },
+        ],
+      },
+    },
     create: {
       name: "NVIDIA GeForce RTX 4090 24GB",
       slug: "nvidia-rtx-4090",
@@ -444,7 +486,10 @@ async function main() {
         },
       },
       images: {
-        create: [{ url: "https://picsum.photos/seed/rtx4090/600/600", isPrimary: true, alt: "NVIDIA RTX 4090" }],
+        create: [
+          { url: "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/rtx-4090/geforce-rtx-4090-product-gallery-thumbnail-267-1.jpg", isPrimary: true, alt: "NVIDIA RTX 4090 front" },
+          { url: "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/rtx-4090/geforce-rtx-4090-product-gallery-thumbnail-267-2.jpg", alt: "NVIDIA RTX 4090 side" },
+        ],
       },
       specs: {
         create: [
@@ -460,7 +505,12 @@ async function main() {
 
   const cpu1 = await prisma.product.upsert({
     where: { slug: "amd-ryzen-9-7950x" },
-    update: {},
+    update: {
+      images: {
+        deleteMany: {},
+        create: [{ url: "https://images.unsplash.com/photo-1600348759986-dc35c2ec7743?w=800&q=80", isPrimary: true, alt: "AMD Ryzen 9 7950X processor" }],
+      },
+    },
     create: {
       name: "AMD Ryzen 9 7950X",
       slug: "amd-ryzen-9-7950x",
@@ -485,7 +535,7 @@ async function main() {
         Memory: { Support: "DDR5-5200", "Max RAM": "128 GB", Channels: "Dual" },
       },
       images: {
-        create: [{ url: "https://picsum.photos/seed/ryzen9/600/600", isPrimary: true, alt: "AMD Ryzen 9 7950X" }],
+        create: [{ url: "https://images.unsplash.com/photo-1600348759986-dc35c2ec7743?w=800&q=80", isPrimary: true, alt: "AMD Ryzen 9 7950X processor" }],
       },
       specs: {
         create: [
@@ -502,7 +552,15 @@ async function main() {
 
   const ssd1 = await prisma.product.upsert({
     where: { slug: "samsung-990-pro-2tb" },
-    update: {},
+    update: {
+      images: {
+        deleteMany: {},
+        create: [
+          { url: "https://images.samsung.com/is/image/samsung/p6pim/us/mz-v9p2t0b-am/gallery/us-990pro-nvme-m2-ssd-mz-v9p2t0b-am-551141316?fmt=jpeg&wid=800&hei=600&qlt=90", isPrimary: true, alt: "Samsung 990 Pro 2TB NVMe SSD" },
+          { url: "https://images.samsung.com/is/image/samsung/p6pim/us/mz-v9p2t0b-am/gallery/us-990pro-nvme-m2-ssd-mz-v9p2t0b-am-551141318?fmt=jpeg&wid=800&hei=600&qlt=90", alt: "Samsung 990 Pro 2TB angle" },
+        ],
+      },
+    },
     create: {
       name: "Samsung 990 Pro 2TB NVMe",
       slug: "samsung-990-pro-2tb",
@@ -534,7 +592,10 @@ async function main() {
         Reliability: { MTBF: "1.5 Million Hours", TBW: "1,200 TB", Warranty: "5 Years" },
       },
       images: {
-        create: [{ url: "https://picsum.photos/seed/samsung990/600/600", isPrimary: true, alt: "Samsung 990 Pro 2TB" }],
+        create: [
+          { url: "https://images.samsung.com/is/image/samsung/p6pim/us/mz-v9p2t0b-am/gallery/us-990pro-nvme-m2-ssd-mz-v9p2t0b-am-551141316?fmt=jpeg&wid=800&hei=600&qlt=90", isPrimary: true, alt: "Samsung 990 Pro 2TB NVMe SSD" },
+          { url: "https://images.samsung.com/is/image/samsung/p6pim/us/mz-v9p2t0b-am/gallery/us-990pro-nvme-m2-ssd-mz-v9p2t0b-am-551141318?fmt=jpeg&wid=800&hei=600&qlt=90", alt: "Samsung 990 Pro 2TB angle" },
+        ],
       },
       specs: {
         create: [
@@ -551,7 +612,15 @@ async function main() {
   // Peripherals
   const mouse1 = await prisma.product.upsert({
     where: { slug: "logitech-g-pro-x-superlight-2" },
-    update: {},
+    update: {
+      images: {
+        deleteMany: {},
+        create: [
+          { url: "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-x-superlight-2/new-gallery-assets-2025/pro-x-superlight-2-mice-top-angle-white-gallery-1.png", isPrimary: true, alt: "Logitech G Pro X Superlight 2 top view" },
+          { url: "https://resource.logitechg.com/w_544,h_544,ar_1,c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-x-superlight-2/new-gallery-assets-2025/pro-x-superlight-2-mouse-lifestyle-gallery-2.png", alt: "Logitech G Pro X Superlight 2 lifestyle" },
+        ],
+      },
+    },
     create: {
       name: "Logitech G Pro X Superlight 2",
       slug: "logitech-g-pro-x-superlight-2",
@@ -590,7 +659,8 @@ async function main() {
       },
       images: {
         create: [
-          { url: "https://picsum.photos/seed/logimouse/600/600", isPrimary: true, alt: "Logitech G Pro X Superlight 2" },
+          { url: "https://resource.logitechg.com/w_544,h_466,ar_7:6,c_pad,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-x-superlight-2/new-gallery-assets-2025/pro-x-superlight-2-mice-top-angle-white-gallery-1.png", isPrimary: true, alt: "Logitech G Pro X Superlight 2 top view" },
+          { url: "https://resource.logitechg.com/w_544,h_544,ar_1,c_fill,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-x-superlight-2/new-gallery-assets-2025/pro-x-superlight-2-mouse-lifestyle-gallery-2.png", alt: "Logitech G Pro X Superlight 2 lifestyle" },
         ],
       },
       specs: {
@@ -607,7 +677,12 @@ async function main() {
 
   await prisma.product.upsert({
     where: { slug: "keychron-q1-pro" },
-    update: {},
+    update: {
+      images: {
+        deleteMany: {},
+        create: [{ url: "https://cdn.shopify.com/s/files/1/0059/0630/1017/products/Keychron-Q1-Pro-QMK-VIA-wireless-custom-mechanical-keyboard-knob-75-percent-layout-full-aluminum-white-frame-for-Mac-Windows-Linux-with-RGB-backlight-hot-swappable-K-Pro-switch-red.jpg?v=1689309013", isPrimary: true, alt: "Keychron Q1 Pro white frame" }],
+      },
+    },
     create: {
       name: "Keychron Q1 Pro Wireless Keyboard",
       slug: "keychron-q1-pro",
@@ -641,7 +716,7 @@ async function main() {
         },
       },
       images: {
-        create: [{ url: "https://picsum.photos/seed/keychron/600/600", isPrimary: true, alt: "Keychron Q1 Pro" }],
+        create: [{ url: "https://cdn.shopify.com/s/files/1/0059/0630/1017/products/Keychron-Q1-Pro-QMK-VIA-wireless-custom-mechanical-keyboard-knob-75-percent-layout-full-aluminum-white-frame-for-Mac-Windows-Linux-with-RGB-backlight-hot-swappable-K-Pro-switch-red.jpg?v=1689309013", isPrimary: true, alt: "Keychron Q1 Pro white frame" }],
       },
       specs: {
         create: [
@@ -657,7 +732,15 @@ async function main() {
 
   const monitor1 = await prisma.product.upsert({
     where: { slug: "lg-ultragear-27gp950" },
-    update: {},
+    update: {
+      images: {
+        deleteMany: {},
+        create: [
+          { url: "https://media.us.lg.com/transform/ecomm-PDPGallery-1100x730/3ed53967-a516-4a2c-b4eb-d7d9a353bf3d/md08000330-large01-jpg?io=transform:fill,width:1536", isPrimary: true, alt: "LG UltraGear 27GP950 front" },
+          { url: "https://media.us.lg.com/transform/ecomm-PDPGallery-1100x730/de28d864-7525-4dda-a784-a975fcd93833/md08000330-large02-jpg?io=transform:fill,width:1536", alt: "LG UltraGear 27GP950 side angle" },
+        ],
+      },
+    },
     create: {
       name: "LG UltraGear 27GP950 4K 144Hz",
       slug: "lg-ultragear-27gp950",
@@ -698,7 +781,8 @@ async function main() {
       },
       images: {
         create: [
-          { url: "https://picsum.photos/seed/lgmonitor/600/600", isPrimary: true, alt: "LG UltraGear 27GP950" },
+          { url: "https://media.us.lg.com/transform/ecomm-PDPGallery-1100x730/3ed53967-a516-4a2c-b4eb-d7d9a353bf3d/md08000330-large01-jpg?io=transform:fill,width:1536", isPrimary: true, alt: "LG UltraGear 27GP950 front" },
+          { url: "https://media.us.lg.com/transform/ecomm-PDPGallery-1100x730/de28d864-7525-4dda-a784-a975fcd93833/md08000330-large02-jpg?io=transform:fill,width:1536", alt: "LG UltraGear 27GP950 side angle" },
         ],
       },
       specs: {
