@@ -114,7 +114,9 @@ async function fetchPublicKey(): Promise<crypto.KeyObject> {
   })
   if (!res.ok) throw new Error("Failed to fetch Monobank public key")
   const { key } = await res.json()
-  _pubKey = crypto.createPublicKey({ key: Buffer.from(key, "base64"), format: "der", type: "spki" })
+  // Monobank returns a base64-encoded PEM string (not raw DER)
+  const pem = Buffer.from(key, "base64").toString("utf-8")
+  _pubKey = crypto.createPublicKey(pem)
   return _pubKey
 }
 
@@ -126,13 +128,11 @@ export async function verifyMonobankWebhook(
   if (!xSign) return process.env.NODE_ENV !== "production"
   try {
     const pubKey = await fetchPublicKey()
-    return crypto.verify(
-      "SHA256",
-      Buffer.from(rawBody, "utf-8"),
-      pubKey,
-      Buffer.from(xSign, "base64")
-    )
-  } catch {
+    const verify = crypto.createVerify("SHA256")
+    verify.update(Buffer.from(rawBody, "utf-8"))
+    return verify.verify(pubKey, Buffer.from(xSign, "base64"))
+  } catch (err) {
+    console.error("Monobank webhook signature verification error:", err)
     return false
   }
 }
