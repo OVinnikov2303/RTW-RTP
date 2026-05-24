@@ -17,7 +17,6 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "resource.logitechg.com" },
       { protocol: "https", hostname: "cdn.shopify.com" },
       { protocol: "https", hostname: "media.us.lg.com" },
-      { protocol: "https", hostname: "upload.wikimedia.org" },
     ],
   },
   experimental: {
