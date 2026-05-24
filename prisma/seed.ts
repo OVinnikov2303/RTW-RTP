@@ -1278,7 +1278,12 @@ async function main() {
 
   await prisma.product.upsert({
     where: { slug: "rtw-rtp-test-payment-product" },
-    update: {},
+    update: {
+      images: {
+        deleteMany: {},
+        create: [{ url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/1000_hryvnia_2019_front.png/800px-1000_hryvnia_2019_front.png", isPrimary: true, alt: "1000 гривень — купюра НБУ", sortOrder: 0 }],
+      },
+    },
     create: {
       name: "RTW-RTP Test Payment Product",
       slug: "rtw-rtp-test-payment-product",
@@ -1313,8 +1318,8 @@ async function main() {
       images: {
         create: [
           {
-            url: "https://picsum.photos/seed/test-payment/800/600",
-            alt: "RTW-RTP Test Payment Product",
+            url: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/1000_hryvnia_2019_front.png/800px-1000_hryvnia_2019_front.png",
+            alt: "1000 гривень — купюра НБУ",
             isPrimary: true,
             sortOrder: 0,
           },
