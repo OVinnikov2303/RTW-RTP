@@ -254,18 +254,7 @@ export function ProductForm({ categories, product }: ProductFormProps) {
                   </Button>
                 )}
               </CldUploadWidget>
-            ) : (
-              <div className="rounded-xl border border-dashed border-amber-400 bg-amber-50 dark:bg-amber-900/10 p-4 text-center">
-                <p className="text-sm font-medium text-amber-700 dark:text-amber-400 mb-1">
-                  Cloudinary не налаштовано
-                </p>
-                <p className="text-xs text-amber-600 dark:text-amber-500">
-                  Додай <code className="bg-amber-100 dark:bg-amber-900/30 px-1 rounded">NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME</code> та{" "}
-                  <code className="bg-amber-100 dark:bg-amber-900/30 px-1 rounded">NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET</code> в змінні середовища.
-                  Дивись <strong>CLAUDE.md → Cloudinary</strong>.
-                </p>
-              </div>
-            )}
+            ) : null}
           </div>
 
           <Separator />
