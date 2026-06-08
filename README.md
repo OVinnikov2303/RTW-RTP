@@ -1,83 +1,83 @@
 # RTW-RTP — Ready to Work, Ready to Play
 
-A fullstack e-commerce store for computer hardware and gaming equipment, built with Next.js 16, TypeScript, Tailwind CSS v4, Prisma ORM, and NextAuth v5. The UI is fully in Ukrainian (`lang="uk"`). Live at [rtw-rtp.vercel.app](https://rtw-rtp.vercel.app).
+Фулстек інтернет-магазин компʼютерної техніки та ігрового обладнання, побудований на Next.js 16, TypeScript, Tailwind CSS v4, Prisma ORM та NextAuth v5. Інтерфейс повністю українською (`lang="uk"`). Працює на [rtw-rtp.vercel.app](https://rtw-rtp.vercel.app).
 
-## Tech Stack
+## Технологічний стек
 
-| Layer | Technology |
+| Шар | Технологія |
 |---|---|
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript |
-| Styling | Tailwind CSS v4 |
-| UI Components | Custom shadcn-style (Radix UI) |
-| Database ORM | Prisma v7 + PostgreSQL |
-| Authentication | NextAuth v5 (Email + Google OAuth) |
-| State Management | Zustand v5 |
-| Image Uploads | Cloudinary (with URL-based fallback when not configured) |
-| Payments | Monobank Acquiring |
-| Forms | React Hook Form + Zod |
-| Animations | Framer Motion |
-| Toasts | Sonner |
+| Фреймворк | Next.js 16 (App Router) |
+| Мова | TypeScript |
+| Стилізація | Tailwind CSS v4 |
+| UI-компоненти | Власні shadcn-style (Radix UI) |
+| ORM бази даних | Prisma v7 + PostgreSQL |
+| Автентифікація | NextAuth v5 (Email + Google OAuth) |
+| Керування станом | Zustand v5 |
+| Завантаження зображень | Cloudinary (з резервним варіантом через URL, якщо не налаштовано) |
+| Платежі | Monobank Acquiring |
+| Форми | React Hook Form + Zod |
+| Анімації | Framer Motion |
+| Сповіщення | Sonner |
 
-## Features
+## Можливості
 
-- **Product catalog** — filtering, sorting, search, pagination
-- **Product detail** — image gallery, specs, reviews, ratings
-- **Shopping cart** — persistent via Zustand + localStorage
-- **Wishlist & Comparison** — up to 4 products compared side-by-side
-- **Authentication** — email/password and Google OAuth
-- **Checkout & payments** — shipping info, promo codes, order creation, Monobank Acquiring checkout
-- **Product reviews** — ratings, sign-in prompt for guests, authors (and admins) can delete their own reviews
-- **User profile** — edit personal info, view order history
-- **Admin dashboard** — stats, product CRUD (with Cloudinary upload widget or URL fallback), order & payment management
-- **Dark / Light mode** — system-aware, toggleable
-- **Fully responsive** — mobile-first design
+- **Каталог товарів** — фільтрація, сортування, пошук, пагінація
+- **Сторінка товару** — галерея зображень, характеристики, відгуки, рейтинги
+- **Кошик** — зберігається через Zustand + localStorage
+- **Список бажань і порівняння** — порівняння до 4 товарів одночасно
+- **Автентифікація** — email/пароль та Google OAuth
+- **Оформлення замовлення та оплата** — дані доставки, промокоди, створення замовлення, оплата через Monobank Acquiring
+- **Відгуки на товари** — рейтинги, пропозиція увійти для гостей, автори (та адміни) можуть видаляти свої відгуки
+- **Профіль користувача** — редагування особистих даних, перегляд історії замовлень
+- **Адмін-панель** — статистика, CRUD товарів (з віджетом завантаження Cloudinary або через URL), керування замовленнями та платежами
+- **Темна / світла тема** — врахування системних налаштувань, перемикання вручну
+- **Повністю адаптивний дизайн** — mobile-first
 
-## Project Structure
+## Структура проєкту
 
 ```
 src/
 ├── app/
-│   ├── (admin)/admin/        # Admin pages (protected)
-│   ├── (auth)/               # Sign in / Sign up
-│   ├── (shop)/               # Store pages
-│   ├── (user)/               # Profile & orders (protected)
-│   └── api/                  # API routes (payments, webhooks, auth)
-├── actions/                  # Server Actions (all data mutations)
-├── auth.ts                   # NextAuth configuration
+│   ├── (admin)/admin/        # Сторінки адмінки (захищені)
+│   ├── (auth)/               # Вхід / Реєстрація
+│   ├── (shop)/               # Сторінки магазину
+│   ├── (user)/               # Профіль і замовлення (захищені)
+│   └── api/                  # API-маршрути (платежі, вебхуки, авторизація)
+├── actions/                  # Server Actions (усі мутації даних)
+├── auth.ts                   # Конфігурація NextAuth
 ├── components/
-│   ├── admin/                # Admin-specific components
-│   ├── auth/                 # Auth forms
-│   ├── home/                 # Homepage sections
-│   ├── layout/               # Header, footer, providers
-│   ├── product/              # Product card, filters, etc.
-│   └── ui/                   # Base UI (Button, Input, Card…)
+│   ├── admin/                # Компоненти адмінки
+│   ├── auth/                 # Форми авторизації
+│   ├── home/                 # Секції головної сторінки
+│   ├── layout/               # Header, footer, провайдери
+│   ├── product/              # Картка товару, фільтри тощо
+│   └── ui/                   # Базові UI-компоненти (Button, Input, Card…)
 ├── lib/
-│   ├── prisma.ts             # Prisma client singleton (PrismaPg adapter)
-│   ├── monobank.ts           # Monobank Acquiring client + webhook verification
-│   └── utils.ts              # Utility functions
-├── store/                    # Zustand stores
+│   ├── prisma.ts             # Singleton клієнта Prisma (адаптер PrismaPg)
+│   ├── monobank.ts           # Клієнт Monobank Acquiring + перевірка вебхуків
+│   └── utils.ts              # Допоміжні функції
+├── store/                    # Zustand-сховища
 │   ├── cart-store.ts
 │   ├── wishlist-store.ts
 │   └── comparison-store.ts
-└── types/                    # TypeScript types
+└── types/                    # TypeScript-типи
 ```
 
-> **Note (Prisma v7):** the database `url` is no longer set in `schema.prisma`. It lives in [`prisma.config.ts`](prisma.config.ts) via `defineConfig` + `@prisma/adapter-pg`, and `src/lib/prisma.ts` builds the client with the `PrismaPg` adapter.
+> **Примітка (Prisma v7):** `url` бази даних більше не задається в `schema.prisma`. Тепер він живе в [`prisma.config.ts`](prisma.config.ts) через `defineConfig` + `@prisma/adapter-pg`, а `src/lib/prisma.ts` створює клієнт з адаптером `PrismaPg`.
 
-## Getting Started
+## Початок роботи
 
-### Prerequisites
+### Передумови
 
 - Node.js 20+
-- PostgreSQL database (local or hosted — this project uses [Neon](https://neon.tech))
-- Google OAuth credentials (optional for Google sign-in)
-- Cloudinary account (optional for image uploads — without it, the admin form falls back to URL-based image input)
-- Monobank Acquiring merchant token (optional, for checkout payments — sandbox tokens work for testing)
+- База даних PostgreSQL (локальна або хмарна — у цьому проєкті використовується [Neon](https://neon.tech))
+- Дані Google OAuth (опційно, для входу через Google)
+- Акаунт Cloudinary (опційно, для завантаження зображень — без нього форма адмінки використовує введення зображення через URL)
+- Токен мерчанта Monobank Acquiring (опційно, для оплати — для тестування підходять sandbox-токени)
 
-### Installation
+### Встановлення
 
-**1. Clone and install dependencies**
+**1. Клонування та встановлення залежностей**
 
 ```bash
 git clone <your-repo>
@@ -85,13 +85,13 @@ cd RTW-RTP
 npm install
 ```
 
-**2. Set up environment variables**
+**2. Налаштування змінних середовища**
 
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env` with your values:
+Відредагуйте `.env`, вказавши свої значення:
 
 ```env
 DATABASE_URL="postgresql://user:password@localhost:5433/rtw_rtp?schema=public"
@@ -106,98 +106,97 @@ CLOUDINARY_API_SECRET="your-api-secret"
 MONOBANK_TOKEN="your-monobank-merchant-token"
 ```
 
-See [`.env.example`](.env.example) for the full annotated list.
+Повний анотований список змінних — у [`.env.example`](.env.example).
 
-**3. Set up the database**
+**3. Налаштування бази даних**
 
 ```bash
-# Generate the Prisma client
+# Згенерувати клієнт Prisma
 npm run db:generate
 
-# Push the schema to your database
+# Накатити схему на базу даних
 npm run db:push
 
-# Seed with sample data
+# Заповнити тестовими даними
 npm run db:seed
 ```
 
-**4. Start the development server**
+**4. Запуск сервера розробки**
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Відкрийте [http://localhost:3000](http://localhost:3000).
 
-### Test Accounts (after seeding)
+### Тестові акаунти (після сидінгу)
 
-| Role | Email | Password |
+| Роль | Email | Пароль |
 |---|---|---|
-| Admin | admin@rtw-rtp.com | admin123 |
-| User | user@rtw-rtp.com | user1234 |
+| Адмін | admin@rtw-rtp.com | admin123 |
+| Користувач | user@rtw-rtp.com | user1234 |
 
-### Promo Codes (after seeding)
+### Промокоди (після сидінгу)
 
-| Code | Discount |
+| Код | Знижка |
 |---|---|
-| `WELCOME10` | 10% off any order |
-| `SAVE50` | 50₴ off orders over 500₴ |
-| `SUMMER25` | 25% off any order |
+| `WELCOME10` | 10% на будь-яке замовлення |
+| `SAVE50` | 50₴ знижки на замовлення від 500₴ |
+| `SUMMER25` | 25% на будь-яке замовлення |
 
-There's also a 1₴ test product at `/products/rtw-rtp-test-payment-product` for exercising the Monobank checkout flow end-to-end.
+Також є тестовий товар за 1₴ на `/products/rtw-rtp-test-payment-product` — для перевірки повного циклу оплати через Monobank.
 
-## Commands
+## Команди
 
 ```bash
-npm run dev           # Start the dev server
-npm run build         # Production build (runs prisma generate first)
-npm run start         # Start the production server
-npm run lint          # Run ESLint
-npx tsc --noEmit      # Type check
+npm run dev           # Запустити сервер розробки
+npm run build         # Продакшн-збірка (спочатку виконує prisma generate)
+npm run start         # Запустити продакшн-сервер
+npm run lint          # Запустити ESLint
+npx tsc --noEmit      # Перевірка типів
 
-npm run db:generate   # Regenerate Prisma client
-npm run db:push       # Sync schema to DB (no migration files)
-npm run db:migrate    # Create + apply a migration
-npm run db:seed       # Seed sample data
-npm run db:studio     # Open Prisma Studio
+npm run db:generate   # Перегенерувати клієнт Prisma
+npm run db:push       # Синхронізувати схему з БД (без файлів міграцій)
+npm run db:migrate    # Створити та застосувати міграцію
+npm run db:seed       # Заповнити тестовими даними
+npm run db:studio     # Відкрити Prisma Studio
 ```
 
-## Pages
+## Сторінки
 
-| Route | Description |
+| Маршрут | Опис |
 |---|---|
-| `/` | Home page |
-| `/products` | Product catalog |
-| `/products/[slug]` | Product detail |
-| `/cart` | Shopping cart |
-| `/checkout` | Checkout |
-| `/wishlist` | Wishlist |
-| `/compare` | Product comparison |
-| `/about` | About us |
-| `/contacts` | Contact |
-| `/sign-in` | Sign in |
-| `/sign-up` | Sign up |
-| `/profile` | User profile |
-| `/orders` / `/orders/[id]` | Order history & details |
-| `/payment/success` / `/payment/failure` | Post-checkout payment status |
-| `/admin` | Admin dashboard |
-| `/admin/products` | Manage products |
-| `/admin/orders` | Manage orders |
-| `/admin/payments` | Manage payments |
+| `/` | Головна сторінка |
+| `/products` | Каталог товарів |
+| `/products/[slug]` | Сторінка товару |
+| `/cart` | Кошик |
+| `/checkout` | Оформлення замовлення |
+| `/wishlist` | Список бажань |
+| `/compare` | Порівняння товарів |
+| `/about` | Про нас |
+| `/contacts` | Контакти |
+| `/sign-in` | Вхід |
+| `/sign-up` | Реєстрація |
+| `/profile` | Профіль користувача |
+| `/orders` / `/orders/[id]` | Історія та деталі замовлень |
+| `/payment/success` / `/payment/failure` | Статус оплати після оформлення |
+| `/admin` | Адмін-панель |
+| `/admin/products` | Керування товарами |
+| `/admin/orders` | Керування замовленнями |
+| `/admin/payments` | Керування платежами |
 
-## Deployment
+## Деплой
 
-Deployed on Vercel at [rtw-rtp.vercel.app](https://rtw-rtp.vercel.app), backed by a Neon PostgreSQL database:
+Розгорнуто на Vercel за адресою [rtw-rtp.vercel.app](https://rtw-rtp.vercel.app), база даних — Neon PostgreSQL:
 
-1. Push to GitHub
-2. Import in Vercel
-3. Add environment variables (see `.env.example`) via `vercel env` or the dashboard
+1. Запушити в GitHub
+2. Імпортувати в Vercel
+3. Додати змінні середовища (див. `.env.example`) через `vercel env` або панель керування
 4. `vercel --prod`
 
-To push the schema and seed a remote database directly:
+Щоб накатити схему та засіяти віддалену базу даних напряму:
 
 ```bash
 npx prisma db push --url "<connection-string>"
 DATABASE_URL="<connection-string>" npx tsx prisma/seed.ts
 ```
-
