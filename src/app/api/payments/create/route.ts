@@ -49,7 +49,6 @@ export async function POST(req: NextRequest) {
 
   const { items, discountCode, ...shippingData } = parsed.data
 
-  // Resolve discount
   let discountAmount = 0
   let discountId: string | undefined
 
@@ -78,7 +77,6 @@ export async function POST(req: NextRequest) {
   const subtotal = items.reduce((s, i) => s + i.product.price * i.quantity, 0)
   const total = Math.max(0.01, subtotal - discountAmount) // minimum 1 kopeck
 
-  // Create order
   let order: { id: string }
   try {
     order = await prisma.order.create({
@@ -111,12 +109,10 @@ export async function POST(req: NextRequest) {
     }).catch(() => {/* non-critical */})
   }
 
-  // Derive base URL
   const host = req.headers.get("host") ?? "localhost:3000"
   const proto = req.headers.get("x-forwarded-proto") ?? (host.includes("localhost") ? "http" : "https")
   const baseUrl = process.env.NEXTAUTH_URL ?? `${proto}://${host}`
 
-  // Create Monobank invoice
   let invoice: { invoiceId: string; pageUrl: string }
   try {
     invoice = await createMonobankInvoice({
@@ -142,7 +138,6 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  // Persist payment transaction
   await prisma.paymentTransaction.create({
     data: {
       orderId: order.id,
@@ -154,7 +149,6 @@ export async function POST(req: NextRequest) {
     },
   })
 
-  // Store invoice ID on order for quick lookup
   await prisma.order.update({
     where: { id: order.id },
     data: { paymentRef: invoice.invoiceId },

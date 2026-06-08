@@ -120,7 +120,6 @@ export function ProductForm({ categories, product }: ProductFormProps) {
   const removeImage = (idx: number) => {
     setImages((prev) => {
       const next = prev.filter((_, i) => i !== idx)
-      // If we removed the primary, make the first one primary
       if (prev[idx]?.isPrimary && next.length > 0) {
         next[0].isPrimary = true
       }
@@ -246,7 +245,7 @@ export function ProductForm({ categories, product }: ProductFormProps) {
                   maxFiles: 10,
                   resourceType: "image",
                   clientAllowedFormats: ["jpg", "jpeg", "png", "webp"],
-                  maxFileSize: 10000000, // 10 MB
+                  maxFileSize: 10000000,
                   folder: "rtw-rtp/products",
                   language: "uk",
                 }}

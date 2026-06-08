@@ -1,6 +1,6 @@
 # RTW-RTP — Ready to Work, Ready to Play
 
-A production-quality fullstack e-commerce store for computer hardware and gaming equipment, built with Next.js 16, TypeScript, Tailwind CSS v4, Prisma ORM, and NextAuth v5.
+A fullstack e-commerce store for computer hardware and gaming equipment, built with Next.js 16, TypeScript, Tailwind CSS v4, Prisma ORM, and NextAuth v5. The UI is fully in Ukrainian (`lang="uk"`). Live at [rtw-rtp.vercel.app](https://rtw-rtp.vercel.app).
 
 ## Tech Stack
 
@@ -13,7 +13,8 @@ A production-quality fullstack e-commerce store for computer hardware and gaming
 | Database ORM | Prisma v7 + PostgreSQL |
 | Authentication | NextAuth v5 (Email + Google OAuth) |
 | State Management | Zustand v5 |
-| Image Uploads | Cloudinary |
+| Image Uploads | Cloudinary (with URL-based fallback when not configured) |
+| Payments | Monobank Acquiring |
 | Forms | React Hook Form + Zod |
 | Animations | Framer Motion |
 | Toasts | Sonner |
@@ -25,9 +26,10 @@ A production-quality fullstack e-commerce store for computer hardware and gaming
 - **Shopping cart** — persistent via Zustand + localStorage
 - **Wishlist & Comparison** — up to 4 products compared side-by-side
 - **Authentication** — email/password and Google OAuth
-- **Checkout** — shipping info, promo codes, order creation
+- **Checkout & payments** — shipping info, promo codes, order creation, Monobank Acquiring checkout
+- **Product reviews** — ratings, sign-in prompt for guests, authors (and admins) can delete their own reviews
 - **User profile** — edit personal info, view order history
-- **Admin dashboard** — stats, product CRUD, order management
+- **Admin dashboard** — stats, product CRUD (with Cloudinary upload widget or URL fallback), order & payment management
 - **Dark / Light mode** — system-aware, toggleable
 - **Fully responsive** — mobile-first design
 
@@ -40,8 +42,8 @@ src/
 │   ├── (auth)/               # Sign in / Sign up
 │   ├── (shop)/               # Store pages
 │   ├── (user)/               # Profile & orders (protected)
-│   └── api/                  # API routes
-├── actions/                  # Server Actions
+│   └── api/                  # API routes (payments, webhooks, auth)
+├── actions/                  # Server Actions (all data mutations)
 ├── auth.ts                   # NextAuth configuration
 ├── components/
 │   ├── admin/                # Admin-specific components
@@ -51,7 +53,8 @@ src/
 │   ├── product/              # Product card, filters, etc.
 │   └── ui/                   # Base UI (Button, Input, Card…)
 ├── lib/
-│   ├── prisma.ts             # Prisma client singleton
+│   ├── prisma.ts             # Prisma client singleton (PrismaPg adapter)
+│   ├── monobank.ts           # Monobank Acquiring client + webhook verification
 │   └── utils.ts              # Utility functions
 ├── store/                    # Zustand stores
 │   ├── cart-store.ts
@@ -60,14 +63,17 @@ src/
 └── types/                    # TypeScript types
 ```
 
+> **Note (Prisma v7):** the database `url` is no longer set in `schema.prisma`. It lives in [`prisma.config.ts`](prisma.config.ts) via `defineConfig` + `@prisma/adapter-pg`, and `src/lib/prisma.ts` builds the client with the `PrismaPg` adapter.
+
 ## Getting Started
 
 ### Prerequisites
 
 - Node.js 20+
-- PostgreSQL database (local or hosted — Neon / Supabase work great)
+- PostgreSQL database (local or hosted — this project uses [Neon](https://neon.tech))
 - Google OAuth credentials (optional for Google sign-in)
-- Cloudinary account (optional for image uploads)
+- Cloudinary account (optional for image uploads — without it, the admin form falls back to URL-based image input)
+- Monobank Acquiring merchant token (optional, for checkout payments — sandbox tokens work for testing)
 
 ### Installation
 
@@ -88,21 +94,28 @@ cp .env.example .env
 Edit `.env` with your values:
 
 ```env
-DATABASE_URL="postgresql://user:password@localhost:5432/rtw_rtp"
+DATABASE_URL="postgresql://user:password@localhost:5433/rtw_rtp?schema=public"
 AUTH_SECRET="generate-with: openssl rand -base64 32"
+NEXTAUTH_URL="http://localhost:3000"
 GOOGLE_CLIENT_ID="your-google-client-id"
 GOOGLE_CLIENT_SECRET="your-google-client-secret"
 NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="your-cloud-name"
+NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET="your-upload-preset"
+CLOUDINARY_API_KEY="your-api-key"
+CLOUDINARY_API_SECRET="your-api-secret"
+MONOBANK_TOKEN="your-monobank-merchant-token"
 ```
+
+See [`.env.example`](.env.example) for the full annotated list.
 
 **3. Set up the database**
 
 ```bash
-# Push the schema to your database
-npm run db:push
-
 # Generate the Prisma client
 npm run db:generate
+
+# Push the schema to your database
+npm run db:push
 
 # Seed with sample data
 npm run db:seed
@@ -128,11 +141,20 @@ Open [http://localhost:3000](http://localhost:3000).
 | Code | Discount |
 |---|---|
 | `WELCOME10` | 10% off any order |
-| `SAVE50` | $50 off orders over $500 |
+| `SAVE50` | 50₴ off orders over 500₴ |
+| `SUMMER25` | 25% off any order |
 
-## Database Commands
+There's also a 1₴ test product at `/products/rtw-rtp-test-payment-product` for exercising the Monobank checkout flow end-to-end.
+
+## Commands
 
 ```bash
+npm run dev           # Start the dev server
+npm run build         # Production build (runs prisma generate first)
+npm run start         # Start the production server
+npm run lint          # Run ESLint
+npx tsc --noEmit      # Type check
+
 npm run db:generate   # Regenerate Prisma client
 npm run db:push       # Sync schema to DB (no migration files)
 npm run db:migrate    # Create + apply a migration
@@ -156,19 +178,26 @@ npm run db:studio     # Open Prisma Studio
 | `/sign-in` | Sign in |
 | `/sign-up` | Sign up |
 | `/profile` | User profile |
-| `/orders` | Order history |
+| `/orders` / `/orders/[id]` | Order history & details |
+| `/payment/success` / `/payment/failure` | Post-checkout payment status |
 | `/admin` | Admin dashboard |
 | `/admin/products` | Manage products |
 | `/admin/orders` | Manage orders |
+| `/admin/payments` | Manage payments |
 
 ## Deployment
 
-This app deploys to Vercel with zero config:
+Deployed on Vercel at [rtw-rtp.vercel.app](https://rtw-rtp.vercel.app), backed by a Neon PostgreSQL database:
 
 1. Push to GitHub
 2. Import in Vercel
-3. Add environment variables
-4. Deploy
+3. Add environment variables (see `.env.example`) via `vercel env` or the dashboard
+4. `vercel --prod`
 
-For the database, use [Neon](https://neon.tech) for a free serverless PostgreSQL.
+To push the schema and seed a remote database directly:
+
+```bash
+npx prisma db push --url "<connection-string>"
+DATABASE_URL="<connection-string>" npx tsx prisma/seed.ts
+```
 

@@ -1,6 +1,8 @@
 import { defineConfig } from "prisma/config"
 import { PrismaPg } from "@prisma/adapter-pg"
 
+process.loadEnvFile?.(".env")
+
 export default defineConfig({
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore

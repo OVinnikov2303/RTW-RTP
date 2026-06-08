@@ -32,7 +32,7 @@ const checkoutSchema = z.object({
 type CheckoutFormData = z.infer<typeof checkoutSchema>
 
 const FREE_SHIPPING_THRESHOLD = 0 // UAH — безкоштовна доставка завжди
-const SHIPPING_COST = 0 // UAH
+const SHIPPING_COST = 0
 
 export default function CheckoutPage() {
   const { data: session } = useSession()
@@ -88,7 +88,6 @@ export default function CheckoutPage() {
         return
       }
 
-      // Clear cart before redirecting to payment page
       clearCart()
       toast.success("Замовлення створено! Перенаправляємо на оплату…")
 

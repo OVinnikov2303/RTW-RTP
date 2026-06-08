@@ -19,7 +19,6 @@ export async function POST(req: NextRequest) {
   const rawBody = await req.text()
   const xSign = req.headers.get("x-sign")
 
-  // Verify Monobank signature
   const valid = await verifyMonobankWebhook(rawBody, xSign)
   if (!valid) {
     console.warn("Monobank webhook: invalid signature")
@@ -59,7 +58,6 @@ export async function POST(req: NextRequest) {
 
     const dbPaymentStatus = mapMonobankStatus(payload.status)
 
-    // Update transaction record
     await prisma.paymentTransaction.update({
       where: { id: tx.id },
       data: {
@@ -74,7 +72,7 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    // Update order payment status (and promote order status on success)
+    // Promote order status to PROCESSING on successful payment
     await prisma.order.update({
       where: { id: tx.orderId },
       data: {
