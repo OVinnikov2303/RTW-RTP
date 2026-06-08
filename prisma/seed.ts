@@ -22,9 +22,9 @@ async function main() {
       where: { slug: "laptops" },
       update: { image: "https://dlcdnwebimgs.asus.com/gain/87DCDC3E-F5C1-4195-915A-3251D2AB06A1/w1000/h732" },
       create: {
-        name: "Laptops",
+        name: "Ноутбуки",
         slug: "laptops",
-        description: "Ultrabooks, gaming laptops, and workstations",
+        description: "Ультрабуки, ігрові ноутбуки та робочі станції",
         image: "https://dlcdnwebimgs.asus.com/gain/87DCDC3E-F5C1-4195-915A-3251D2AB06A1/w1000/h732",
         sortOrder: 1,
       },
@@ -33,9 +33,9 @@ async function main() {
       where: { slug: "gaming-pcs" },
       update: { image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/desktops/alienware-desktops/alienware-aurora-r16/media-gallery/liquid/desktop-aw-r16-bk-lqd-cooling-gallery-3.psd?fmt=jpeg&wid=800&hei=600&qlt=90" },
       create: {
-        name: "Gaming PCs",
+        name: "Ігрові ПК",
         slug: "gaming-pcs",
-        description: "Pre-built rigs and custom desktops",
+        description: "Готові ігрові системи та кастомні десктопи",
         image: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/desktops/alienware-desktops/alienware-aurora-r16/media-gallery/liquid/desktop-aw-r16-bk-lqd-cooling-gallery-3.psd?fmt=jpeg&wid=800&hei=600&qlt=90",
         sortOrder: 2,
       },
@@ -44,9 +44,9 @@ async function main() {
       where: { slug: "components" },
       update: { image: "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/rtx-4090/geforce-rtx-4090-product-gallery-thumbnail-267-1.jpg" },
       create: {
-        name: "Components",
+        name: "Комплектуючі",
         slug: "components",
-        description: "CPUs, GPUs, RAM, storage and more",
+        description: "Процесори, відеокарти, оперативна пам'ять, накопичувачі та інше",
         image: "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/rtx-4090/geforce-rtx-4090-product-gallery-thumbnail-267-1.jpg",
         sortOrder: 3,
       },
@@ -55,9 +55,9 @@ async function main() {
       where: { slug: "peripherals" },
       update: { image: "https://cdn.shopify.com/s/files/1/0059/0630/1017/products/Keychron-Q1-Pro-QMK-VIA-wireless-custom-mechanical-keyboard-knob-75-percent-layout-full-aluminum-white-frame-for-Mac-Windows-Linux-with-RGB-backlight-hot-swappable-K-Pro-switch-red.jpg?v=1689309013" },
       create: {
-        name: "Peripherals",
+        name: "Периферія",
         slug: "peripherals",
-        description: "Keyboards, mice, monitors, headsets",
+        description: "Клавіатури, миші, монітори, гарнітури",
         image: "https://cdn.shopify.com/s/files/1/0059/0630/1017/products/Keychron-Q1-Pro-QMK-VIA-wireless-custom-mechanical-keyboard-knob-75-percent-layout-full-aluminum-white-frame-for-Mac-Windows-Linux-with-RGB-backlight-hot-swappable-K-Pro-switch-red.jpg?v=1689309013",
         sortOrder: 4,
       },
@@ -70,9 +70,9 @@ async function main() {
       where: { slug: "gaming-laptops" },
       update: {},
       create: {
-        name: "Gaming Laptops",
+        name: "Ігрові ноутбуки",
         slug: "gaming-laptops",
-        description: "High-performance gaming laptops",
+        description: "Високопродуктивні ігрові ноутбуки",
         parentId: laptops.id,
         sortOrder: 1,
       },
@@ -81,9 +81,9 @@ async function main() {
       where: { slug: "workstation-laptops" },
       update: {},
       create: {
-        name: "Workstation Laptops",
+        name: "Робочі станції-ноутбуки",
         slug: "workstation-laptops",
-        description: "Professional workstation-class laptops",
+        description: "Професійні ноутбуки робочого класу",
         parentId: laptops.id,
         sortOrder: 2,
       },
@@ -92,9 +92,9 @@ async function main() {
       where: { slug: "graphics-cards" },
       update: {},
       create: {
-        name: "Graphics Cards",
+        name: "Відеокарти",
         slug: "graphics-cards",
-        description: "Discrete GPUs for gaming and compute",
+        description: "Дискретні відеокарти для ігор та обчислень",
         parentId: components.id,
         sortOrder: 1,
       },
@@ -103,9 +103,9 @@ async function main() {
       where: { slug: "processors" },
       update: {},
       create: {
-        name: "Processors",
+        name: "Процесори",
         slug: "processors",
-        description: "Desktop and laptop CPUs",
+        description: "Процесори для настільних ПК та ноутбуків",
         parentId: components.id,
         sortOrder: 2,
       },
@@ -180,7 +180,7 @@ async function main() {
       name: 'MacBook Pro 16" M3 Pro',
       slug: "macbook-pro-16-m3",
       description:
-        "The most powerful MacBook Pro ever. M3 Pro chip delivers exceptional performance for demanding workflows.",
+        "Найпотужніший MacBook Pro в історії. Чіп M3 Pro забезпечує виняткову продуктивність для найскладніших задач.",
       price: 2499,
       comparePrice: 2699,
       cost: 1800,
@@ -196,23 +196,23 @@ async function main() {
       viewCount: 1240,
       purchaseCount: 48,
       specifications: {
-        Performance: {
-          Processor: "Apple M3 Pro (12-core)",
-          RAM: "18 GB Unified Memory",
-          GPU: "18-core GPU",
+        Продуктивність: {
+          Процесор: "Apple M3 Pro (12 ядер)",
+          "Оперативна пам'ять": "18 ГБ Unified Memory",
+          Відеокарта: "18-ядерний GPU",
         },
-        Storage: { SSD: "512 GB NVMe", Expandable: false },
-        Display: {
-          Size: '16.2"',
-          Type: "Liquid Retina XDR",
-          Resolution: "3456 × 2234",
-          "Refresh Rate": "120 Hz ProMotion",
+        Накопичувач: { SSD: "512 ГБ NVMe", Розширюваність: false },
+        Дисплей: {
+          Діагональ: '16.2"',
+          Тип: "Liquid Retina XDR",
+          "Роздільна здатність": "3456 × 2234",
+          "Частота оновлення": "120 Гц ProMotion",
         },
-        Battery: { Life: "Up to 22 hours", Capacity: "100Wh" },
-        Connectivity: {
-          WiFi: "Wi-Fi 6E",
+        Акумулятор: { "Час роботи": "До 22 годин", Ємність: "100 Вт·год" },
+        "Зв'язок": {
+          "Wi-Fi": "Wi-Fi 6E",
           Bluetooth: "5.3",
-          Ports: "3× Thunderbolt 4, HDMI 2.1, SD card, MagSafe 3",
+          Порти: "3× Thunderbolt 4, HDMI 2.1, SD-картка, MagSafe 3",
         },
       },
       images: {
@@ -223,12 +223,12 @@ async function main() {
       },
       specs: {
         create: [
-          { key: "Processor", value: "Apple M3 Pro (12-core)", group: "Performance", sortOrder: 1 },
-          { key: "RAM", value: "18 GB Unified Memory", group: "Performance", sortOrder: 2 },
-          { key: "Storage", value: "512 GB SSD", group: "Storage", sortOrder: 3 },
-          { key: "Display", value: '16.2" Liquid Retina XDR', group: "Display", sortOrder: 4 },
-          { key: "Battery", value: "Up to 22 hours", group: "Battery", sortOrder: 5 },
-          { key: "GPU", value: "18-core GPU", group: "Performance", sortOrder: 6 },
+          { key: "Процесор", value: "Apple M3 Pro (12 ядер)", group: "Продуктивність", sortOrder: 1 },
+          { key: "Оперативна пам'ять", value: "18 ГБ Unified Memory", group: "Продуктивність", sortOrder: 2 },
+          { key: "Накопичувач", value: "512 ГБ SSD", group: "Накопичувач", sortOrder: 3 },
+          { key: "Дисплей", value: '16.2" Liquid Retina XDR', group: "Дисплей", sortOrder: 4 },
+          { key: "Акумулятор", value: "До 22 годин", group: "Акумулятор", sortOrder: 5 },
+          { key: "Відеокарта", value: "18-ядерний GPU", group: "Продуктивність", sortOrder: 6 },
         ],
       },
     },
@@ -245,7 +245,7 @@ async function main() {
     create: {
       name: "Dell XPS 15 OLED",
       slug: "dell-xps-15-oled",
-      description: "Premium performance laptop with stunning OLED display and Intel Core i9 processor.",
+      description: "Преміальний продуктивний ноутбук з вражаючим OLED-дисплеєм та процесором Intel Core i9.",
       price: 1899,
       comparePrice: 2099,
       cost: 1350,
@@ -259,25 +259,25 @@ async function main() {
       viewCount: 890,
       purchaseCount: 31,
       specifications: {
-        Performance: {
-          Processor: "Intel Core i9-13900H",
-          RAM: "32 GB DDR5-5200",
-          GPU: "NVIDIA RTX 4060 8GB",
+        Продуктивність: {
+          Процесор: "Intel Core i9-13900H",
+          "Оперативна пам'ять": "32 ГБ DDR5-5200",
+          Відеокарта: "NVIDIA RTX 4060 8 ГБ",
         },
-        Display: { Size: '15.6"', Type: "OLED", Resolution: "3456 × 2160 (3.5K)", Touch: false },
-        Storage: { SSD: "1 TB PCIe 4.0 NVMe" },
-        Battery: { Life: "Up to 13 hours", Capacity: "86Wh" },
+        Дисплей: { Діагональ: '15.6"', Тип: "OLED", "Роздільна здатність": "3456 × 2160 (3.5K)", Сенсорний: false },
+        Накопичувач: { SSD: "1 ТБ PCIe 4.0 NVMe" },
+        Акумулятор: { "Час роботи": "До 13 годин", Ємність: "86 Вт·год" },
       },
       images: {
         create: [{ url: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-15-9530/media-gallery/touch-black/notebook-xps-15-9530-t-black-gallery-1.psd?fmt=jpeg&wid=800&hei=600&qlt=90", isPrimary: true, alt: "Dell XPS 15 OLED" }],
       },
       specs: {
         create: [
-          { key: "Processor", value: "Intel Core i9-13900H", group: "Performance", sortOrder: 1 },
-          { key: "RAM", value: "32 GB DDR5", group: "Performance", sortOrder: 2 },
-          { key: "Storage", value: "1 TB NVMe SSD", group: "Storage", sortOrder: 3 },
-          { key: "Display", value: '15.6" 3.5K OLED', group: "Display", sortOrder: 4 },
-          { key: "GPU", value: "NVIDIA RTX 4060", group: "Performance", sortOrder: 5 },
+          { key: "Процесор", value: "Intel Core i9-13900H", group: "Продуктивність", sortOrder: 1 },
+          { key: "Оперативна пам'ять", value: "32 ГБ DDR5", group: "Продуктивність", sortOrder: 2 },
+          { key: "Накопичувач", value: "1 ТБ NVMe SSD", group: "Накопичувач", sortOrder: 3 },
+          { key: "Дисплей", value: '15.6" 3.5K OLED', group: "Дисплей", sortOrder: 4 },
+          { key: "Відеокарта", value: "NVIDIA RTX 4060", group: "Продуктивність", sortOrder: 5 },
         ],
       },
     },
@@ -297,7 +297,7 @@ async function main() {
     create: {
       name: "ASUS ROG Zephyrus G14",
       slug: "asus-rog-zephyrus-g14",
-      description: "The ultimate gaming laptop. Compact form factor with desktop-class performance.",
+      description: "Найкращий ігровий ноутбук. Компактний форм-фактор із продуктивністю настільного ПК.",
       price: 1649,
       stock: 20,
       brand: "ASUS",
@@ -309,19 +309,19 @@ async function main() {
       viewCount: 2100,
       purchaseCount: 76,
       specifications: {
-        Performance: {
-          Processor: "AMD Ryzen 9 7940HS",
-          RAM: "32 GB DDR5",
-          GPU: "NVIDIA RTX 4070 8GB",
+        Продуктивність: {
+          Процесор: "AMD Ryzen 9 7940HS",
+          "Оперативна пам'ять": "32 ГБ DDR5",
+          Відеокарта: "NVIDIA RTX 4070 8 ГБ",
         },
-        Display: {
-          Size: '14"',
-          Type: "IPS",
-          Resolution: "2560 × 1600 (QHD+)",
-          "Refresh Rate": "165 Hz",
+        Дисплей: {
+          Діагональ: '14"',
+          Тип: "IPS",
+          "Роздільна здатність": "2560 × 1600 (QHD+)",
+          "Частота оновлення": "165 Гц",
         },
-        Storage: { SSD: "1 TB PCIe 4.0 NVMe" },
-        Design: { Weight: "1.65 kg", "AniMe Matrix": true },
+        Накопичувач: { SSD: "1 ТБ PCIe 4.0 NVMe" },
+        Дизайн: { Вага: "1.65 кг", "AniMe Matrix": true },
       },
       images: {
         create: [
@@ -331,11 +331,11 @@ async function main() {
       },
       specs: {
         create: [
-          { key: "Processor", value: "AMD Ryzen 9 7940HS", group: "Performance", sortOrder: 1 },
-          { key: "RAM", value: "32 GB DDR5", group: "Performance", sortOrder: 2 },
-          { key: "Storage", value: "1 TB NVMe SSD", group: "Storage", sortOrder: 3 },
-          { key: "Display", value: '14" QHD+ 165Hz', group: "Display", sortOrder: 4 },
-          { key: "GPU", value: "NVIDIA RTX 4070", group: "Performance", sortOrder: 5 },
+          { key: "Процесор", value: "AMD Ryzen 9 7940HS", group: "Продуктивність", sortOrder: 1 },
+          { key: "Оперативна пам'ять", value: "32 ГБ DDR5", group: "Продуктивність", sortOrder: 2 },
+          { key: "Накопичувач", value: "1 ТБ NVMe SSD", group: "Накопичувач", sortOrder: 3 },
+          { key: "Дисплей", value: '14" QHD+ 165Гц', group: "Дисплей", sortOrder: 4 },
+          { key: "Відеокарта", value: "NVIDIA RTX 4070", group: "Продуктивність", sortOrder: 5 },
         ],
       },
     },
@@ -354,7 +354,7 @@ async function main() {
       name: "Corsair ONE i300",
       slug: "corsair-one-i300",
       description:
-        "Compact powerhouse desktop PC with liquid-cooled CPU and GPU in a stunning ITX form factor.",
+        "Компактний потужний настільний ПК з рідинним охолодженням CPU та GPU у вражаючому ITX-форматі.",
       price: 3499,
       comparePrice: 3799,
       cost: 2600,
@@ -370,28 +370,28 @@ async function main() {
       viewCount: 3400,
       purchaseCount: 12,
       specifications: {
-        Performance: {
-          Processor: "Intel Core i9-13900K",
-          RAM: "64 GB DDR5-5600",
-          GPU: "NVIDIA RTX 4090 24GB",
+        Продуктивність: {
+          Процесор: "Intel Core i9-13900K",
+          "Оперативна пам'ять": "64 ГБ DDR5-5600",
+          Відеокарта: "NVIDIA RTX 4090 24 ГБ",
         },
-        Storage: { SSD: "2 TB PCIe 4.0 NVMe" },
-        Cooling: {
-          CPU: "240mm Custom Liquid Loop",
-          GPU: "Custom Liquid Cooled",
+        Накопичувач: { SSD: "2 ТБ PCIe 4.0 NVMe" },
+        Охолодження: {
+          CPU: "Кастомний рідинний контур 240 мм",
+          GPU: "Кастомне рідинне охолодження",
         },
-        "Form Factor": { Type: "Mini-ITX", Dimensions: "38 × 17.2 × 27 cm" },
+        "Форм-фактор": { Тип: "Mini-ITX", Розміри: "38 × 17.2 × 27 см" },
       },
       images: {
         create: [{ url: "https://assets.corsair.com/image/upload/c_pad,q_85,h_1100,w_1100,f_auto/products/Systems/CS-9020032-NA/Gallery/CORSAIR_ONE_i300_2022_01.webp", isPrimary: true, alt: "Corsair ONE i300" }],
       },
       specs: {
         create: [
-          { key: "Processor", value: "Intel Core i9-13900K", group: "Performance", sortOrder: 1 },
-          { key: "RAM", value: "64 GB DDR5", group: "Performance", sortOrder: 2 },
-          { key: "Storage", value: "2 TB NVMe SSD", group: "Storage", sortOrder: 3 },
-          { key: "GPU", value: "NVIDIA RTX 4090", group: "Performance", sortOrder: 4 },
-          { key: "Cooling", value: "Dual liquid cooling", group: "Cooling", sortOrder: 5 },
+          { key: "Процесор", value: "Intel Core i9-13900K", group: "Продуктивність", sortOrder: 1 },
+          { key: "Оперативна пам'ять", value: "64 ГБ DDR5", group: "Продуктивність", sortOrder: 2 },
+          { key: "Накопичувач", value: "2 ТБ NVMe SSD", group: "Накопичувач", sortOrder: 3 },
+          { key: "Відеокарта", value: "NVIDIA RTX 4090", group: "Продуктивність", sortOrder: 4 },
+          { key: "Охолодження", value: "Подвійне рідинне охолодження", group: "Охолодження", sortOrder: 5 },
         ],
       },
     },
@@ -408,7 +408,7 @@ async function main() {
     create: {
       name: "Alienware Aurora R16",
       slug: "alienware-aurora-r16",
-      description: "Dell's flagship gaming desktop with next-gen performance and iconic Alienware design.",
+      description: "Флагманський ігровий ПК від Dell із продуктивністю нового покоління та культовим дизайном Alienware.",
       price: 2799,
       stock: 7,
       brand: "Alienware",
@@ -419,23 +419,23 @@ async function main() {
       viewCount: 1800,
       purchaseCount: 22,
       specifications: {
-        Performance: {
-          Processor: "Intel Core i9-14900KF",
-          RAM: "32 GB DDR5",
-          GPU: "NVIDIA RTX 4080 16GB",
+        Продуктивність: {
+          Процесор: "Intel Core i9-14900KF",
+          "Оперативна пам'ять": "32 ГБ DDR5",
+          Відеокарта: "NVIDIA RTX 4080 16 ГБ",
         },
-        Storage: { Primary: "1 TB NVMe", Secondary: "2 TB NVMe" },
-        Chassis: { "Form Factor": "Mid-Tower", RGB: "AlienFX" },
+        Накопичувач: { Основний: "1 ТБ NVMe", Додатковий: "2 ТБ NVMe" },
+        Корпус: { "Форм-фактор": "Mid-Tower", RGB: "AlienFX" },
       },
       images: {
         create: [{ url: "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/desktops/alienware-desktops/alienware-aurora-r16/media-gallery/liquid/desktop-aw-r16-bk-lqd-cooling-gallery-3.psd?fmt=jpeg&wid=800&hei=600&qlt=90", isPrimary: true, alt: "Alienware Aurora R16" }],
       },
       specs: {
         create: [
-          { key: "Processor", value: "Intel Core i9-14900KF", group: "Performance", sortOrder: 1 },
-          { key: "RAM", value: "32 GB DDR5", group: "Performance", sortOrder: 2 },
-          { key: "Storage", value: "1 TB + 2 TB NVMe", group: "Storage", sortOrder: 3 },
-          { key: "GPU", value: "NVIDIA RTX 4080", group: "Performance", sortOrder: 4 },
+          { key: "Процесор", value: "Intel Core i9-14900KF", group: "Продуктивність", sortOrder: 1 },
+          { key: "Оперативна пам'ять", value: "32 ГБ DDR5", group: "Продуктивність", sortOrder: 2 },
+          { key: "Накопичувач", value: "1 ТБ + 2 ТБ NVMe", group: "Накопичувач", sortOrder: 3 },
+          { key: "Відеокарта", value: "NVIDIA RTX 4080", group: "Продуктивність", sortOrder: 4 },
         ],
       },
     },
@@ -456,7 +456,7 @@ async function main() {
     create: {
       name: "NVIDIA GeForce RTX 4090 24GB",
       slug: "nvidia-rtx-4090",
-      description: "The fastest consumer GPU ever made. Dominate 4K gaming and AI workloads.",
+      description: "Найшвидша споживча відеокарта в історії. Домінуйте в іграх 4K та AI-задачах.",
       price: 1599,
       comparePrice: 1799,
       cost: 950,
@@ -470,19 +470,19 @@ async function main() {
       viewCount: 5600,
       purchaseCount: 19,
       specifications: {
-        GPU: {
-          Architecture: "Ada Lovelace",
-          VRAM: "24 GB GDDR6X",
-          "CUDA Cores": 16384,
-          "RT Cores": "3rd Gen",
-          "Tensor Cores": "4th Gen",
+        Відеокарта: {
+          Архітектура: "Ada Lovelace",
+          VRAM: "24 ГБ GDDR6X",
+          "CUDA-ядра": 16384,
+          "RT-ядра": "3-го покоління",
+          "Tensor-ядра": "4-го покоління",
         },
-        Clocks: { Base: "2.23 GHz", Boost: "2.52 GHz" },
-        Memory: { "Bus Width": "384-bit", Bandwidth: "1008 GB/s" },
-        Power: { TDP: "450W", Connectors: "16-pin (4× 8-pin adapter included)" },
-        Interface: {
+        Частоти: { Базова: "2.23 ГГц", Турбо: "2.52 ГГц" },
+        "Пам'ять": { "Розрядність шини": "384-біт", "Пропускна здатність": "1008 ГБ/с" },
+        Живлення: { TDP: "450 Вт", "Роз'єми": "16-pin (у комплекті 4× 8-pin перехідник)" },
+        Інтерфейс: {
           PCIe: "PCIe 4.0 x16",
-          Outputs: "HDMI 2.1, 3× DisplayPort 1.4a",
+          Виходи: "HDMI 2.1, 3× DisplayPort 1.4a",
         },
       },
       images: {
@@ -493,11 +493,11 @@ async function main() {
       },
       specs: {
         create: [
-          { key: "VRAM", value: "24 GB GDDR6X", group: "Memory", sortOrder: 1 },
-          { key: "CUDA Cores", value: "16,384", group: "GPU", sortOrder: 2 },
-          { key: "Boost Clock", value: "2.52 GHz", group: "Clocks", sortOrder: 3 },
-          { key: "TDP", value: "450W", group: "Power", sortOrder: 4 },
-          { key: "Interface", value: "PCIe 4.0 x16", group: "Interface", sortOrder: 5 },
+          { key: "VRAM", value: "24 ГБ GDDR6X", group: "Пам'ять", sortOrder: 1 },
+          { key: "CUDA-ядра", value: "16 384", group: "Відеокарта", sortOrder: 2 },
+          { key: "Турбо-частота", value: "2.52 ГГц", group: "Частоти", sortOrder: 3 },
+          { key: "TDP", value: "450 Вт", group: "Живлення", sortOrder: 4 },
+          { key: "Інтерфейс", value: "PCIe 4.0 x16", group: "Інтерфейс", sortOrder: 5 },
         ],
       },
     },
@@ -515,7 +515,7 @@ async function main() {
       name: "AMD Ryzen 9 7950X",
       slug: "amd-ryzen-9-7950x",
       description:
-        "AMD's flagship desktop processor with 16 cores and 32 threads for ultimate workstation performance.",
+        "Флагманський настільний процесор AMD з 16 ядрами та 32 потоками для найвищої продуктивності робочої станції.",
       price: 549,
       comparePrice: 699,
       cost: 380,
@@ -528,23 +528,23 @@ async function main() {
       viewCount: 4200,
       purchaseCount: 88,
       specifications: {
-        "Core Configuration": { Cores: 16, Threads: 32, Architecture: "Zen 4" },
-        Clocks: { Base: "4.5 GHz", Boost: "5.7 GHz" },
-        Cache: { L2: "16 MB", L3: "64 MB" },
-        Platform: { Socket: "AM5", TDP: "170W", Process: "TSMC 5nm" },
-        Memory: { Support: "DDR5-5200", "Max RAM": "128 GB", Channels: "Dual" },
+        "Конфігурація ядер": { Ядра: 16, Потоки: 32, Архітектура: "Zen 4" },
+        Частоти: { Базова: "4.5 ГГц", Турбо: "5.7 ГГц" },
+        "Кеш-пам'ять": { L2: "16 МБ", L3: "64 МБ" },
+        Платформа: { Сокет: "AM5", TDP: "170 Вт", "Техпроцес": "TSMC 5 нм" },
+        "Пам'ять": { Підтримка: "DDR5-5200", "Макс. обсяг": "128 ГБ", Канали: "Двоканальна" },
       },
       images: {
         create: [{ url: "https://images.unsplash.com/photo-1600348759986-dc35c2ec7743?w=800&q=80", isPrimary: true, alt: "AMD Ryzen 9 7950X processor" }],
       },
       specs: {
         create: [
-          { key: "Cores/Threads", value: "16 / 32", group: "Core Config", sortOrder: 1 },
-          { key: "Base Clock", value: "4.5 GHz", group: "Clocks", sortOrder: 2 },
-          { key: "Boost Clock", value: "5.7 GHz", group: "Clocks", sortOrder: 3 },
-          { key: "TDP", value: "170W", group: "Power", sortOrder: 4 },
-          { key: "Socket", value: "AM5", group: "Platform", sortOrder: 5 },
-          { key: "Cache", value: "64 MB L3", group: "Cache", sortOrder: 6 },
+          { key: "Ядра/Потоки", value: "16 / 32", group: "Конфігурація ядер", sortOrder: 1 },
+          { key: "Базова частота", value: "4.5 ГГц", group: "Частоти", sortOrder: 2 },
+          { key: "Турбо-частота", value: "5.7 ГГц", group: "Частоти", sortOrder: 3 },
+          { key: "TDP", value: "170 Вт", group: "Живлення", sortOrder: 4 },
+          { key: "Сокет", value: "AM5", group: "Платформа", sortOrder: 5 },
+          { key: "Кеш-пам'ять", value: "64 МБ L3", group: "Кеш-пам'ять", sortOrder: 6 },
         ],
       },
     },
@@ -564,7 +564,7 @@ async function main() {
     create: {
       name: "Samsung 990 Pro 2TB NVMe",
       slug: "samsung-990-pro-2tb",
-      description: "Blazing-fast PCIe 4.0 NVMe SSD with sequential read speeds up to 7,450 MB/s.",
+      description: "Надшвидкий NVMe SSD PCIe 4.0 зі швидкістю послідовного читання до 7 450 МБ/с.",
       price: 179,
       stock: 50,
       brand: "Samsung",
@@ -576,20 +576,20 @@ async function main() {
       viewCount: 3100,
       purchaseCount: 142,
       specifications: {
-        Capacity: { Size: "2 TB", Formatted: "~1.86 TB" },
-        Performance: {
-          "Sequential Read": "7,450 MB/s",
-          "Sequential Write": "6,900 MB/s",
-          "Random Read": "1,600K IOPS",
-          "Random Write": "1,550K IOPS",
+        "Об'єм": { Розмір: "2 ТБ", Відформатовано: "~1.86 ТБ" },
+        Продуктивність: {
+          "Послідовне читання": "7 450 МБ/с",
+          "Послідовний запис": "6 900 МБ/с",
+          "Випадкове читання": "1 600 тис. IOPS",
+          "Випадковий запис": "1 550 тис. IOPS",
         },
-        Hardware: {
-          Interface: "PCIe 4.0 x4 NVMe",
-          "Form Factor": "M.2 2280",
+        "Апаратна частина": {
+          Інтерфейс: "PCIe 4.0 x4 NVMe",
+          "Форм-фактор": "M.2 2280",
           NAND: "Samsung V-NAND TLC",
-          Controller: "Samsung Elpis 2",
+          Контролер: "Samsung Elpis 2",
         },
-        Reliability: { MTBF: "1.5 Million Hours", TBW: "1,200 TB", Warranty: "5 Years" },
+        Надійність: { MTBF: "1.5 млн годин", TBW: "1 200 ТБ", Гарантія: "5 років" },
       },
       images: {
         create: [
@@ -599,11 +599,11 @@ async function main() {
       },
       specs: {
         create: [
-          { key: "Capacity", value: "2 TB", group: "Capacity", sortOrder: 1 },
-          { key: "Interface", value: "PCIe 4.0 x4", group: "Hardware", sortOrder: 2 },
-          { key: "Read Speed", value: "7,450 MB/s", group: "Performance", sortOrder: 3 },
-          { key: "Write Speed", value: "6,900 MB/s", group: "Performance", sortOrder: 4 },
-          { key: "Form Factor", value: "M.2 2280", group: "Hardware", sortOrder: 5 },
+          { key: "Об'єм", value: "2 ТБ", group: "Об'єм", sortOrder: 1 },
+          { key: "Інтерфейс", value: "PCIe 4.0 x4", group: "Апаратна частина", sortOrder: 2 },
+          { key: "Швидкість читання", value: "7 450 МБ/с", group: "Продуктивність", sortOrder: 3 },
+          { key: "Швидкість запису", value: "6 900 МБ/с", group: "Продуктивність", sortOrder: 4 },
+          { key: "Форм-фактор", value: "M.2 2280", group: "Апаратна частина", sortOrder: 5 },
         ],
       },
     },
@@ -624,7 +624,7 @@ async function main() {
     create: {
       name: "Logitech G Pro X Superlight 2",
       slug: "logitech-g-pro-x-superlight-2",
-      description: "Ultra-lightweight wireless gaming mouse used by esports professionals worldwide.",
+      description: "Надлегка бездротова ігрова миша, якою користуються кіберспортивні професіонали по всьому світу.",
       price: 159,
       comparePrice: 179,
       cost: 70,
@@ -639,23 +639,23 @@ async function main() {
       viewCount: 7800,
       purchaseCount: 310,
       specifications: {
-        Sensor: {
-          Model: "HERO 2 25K",
-          "DPI Range": "100 – 25,600",
-          "Tracking Speed": "500 IPS",
-          Acceleration: "40G",
+        Сенсор: {
+          Модель: "HERO 2 25K",
+          "Діапазон DPI": "100 – 25 600",
+          "Швидкість трекінгу": "500 IPS",
+          Прискорення: "40G",
         },
-        Design: {
-          Weight: "60g (without cable)",
-          Dimensions: "125.9 × 63.5 × 40.0 mm",
-          Feet: "100% PTFE",
+        Дизайн: {
+          Вага: "60 г (без кабелю)",
+          Розміри: "125.9 × 63.5 × 40.0 мм",
+          Ніжки: "100% PTFE",
         },
-        Wireless: {
-          Technology: "LIGHTSPEED 2.4 GHz",
-          "Battery Life": "Up to 95 hours",
-          Charge: "USB-C",
+        "Бездротовий зв'язок": {
+          Технологія: "LIGHTSPEED 2.4 ГГц",
+          "Час роботи": "До 95 годин",
+          Заряджання: "USB-C",
         },
-        Buttons: { Count: 5, Switches: "Mechanical, rated 90M clicks" },
+        Кнопки: { Кількість: 5, Перемикачі: "Механічні, ресурс 90 млн натискань" },
       },
       images: {
         create: [
@@ -665,11 +665,11 @@ async function main() {
       },
       specs: {
         create: [
-          { key: "Sensor", value: "HERO 2 25K", group: "Sensor", sortOrder: 1 },
-          { key: "Weight", value: "60g", group: "Design", sortOrder: 2 },
-          { key: "Battery Life", value: "Up to 95 hours", group: "Wireless", sortOrder: 3 },
-          { key: "DPI Range", value: "100 – 25,600", group: "Sensor", sortOrder: 4 },
-          { key: "Connectivity", value: "LIGHTSPEED Wireless", group: "Wireless", sortOrder: 5 },
+          { key: "Сенсор", value: "HERO 2 25K", group: "Сенсор", sortOrder: 1 },
+          { key: "Вага", value: "60 г", group: "Дизайн", sortOrder: 2 },
+          { key: "Час роботи", value: "До 95 годин", group: "Бездротовий зв'язок", sortOrder: 3 },
+          { key: "Діапазон DPI", value: "100 – 25 600", group: "Сенсор", sortOrder: 4 },
+          { key: "Зв'язок", value: "Бездротовий LIGHTSPEED", group: "Бездротовий зв'язок", sortOrder: 5 },
         ],
       },
     },
@@ -686,7 +686,7 @@ async function main() {
     create: {
       name: "Keychron Q1 Pro Wireless Keyboard",
       slug: "keychron-q1-pro",
-      description: "Premium 75% wireless mechanical keyboard with gasket mount and hot-swappable switches.",
+      description: "Преміальна бездротова механічна клавіатура у форматі 75% з гасket-кріпленням та гарячозамінними перемикачами.",
       price: 199,
       stock: 30,
       brand: "Keychron",
@@ -697,22 +697,22 @@ async function main() {
       viewCount: 4500,
       purchaseCount: 178,
       specifications: {
-        Layout: { Size: "75%", Keys: 82, "Hot-Swap": true },
-        Switch: {
-          Default: "Keychron K Pro Red",
-          "Actuation Force": "45g",
-          "Travel Distance": "4.0 mm",
+        Розкладка: { Розмір: "75%", Клавіші: 82, "Гаряча заміна": true },
+        Перемикачі: {
+          "За замовчуванням": "Keychron K Pro Red",
+          "Сила натискання": "45 г",
+          "Хід клавіші": "4.0 мм",
         },
-        Connectivity: {
-          Wireless: "Bluetooth 5.1",
-          Wired: "USB-C",
-          "Multi-device": "3 devices",
+        "Зв'язок": {
+          Бездротовий: "Bluetooth 5.1",
+          Дротовий: "USB-C",
+          "Кілька пристроїв": "3 пристрої",
         },
-        Battery: { Capacity: "4,000 mAh", Life: "Up to 300 hours (backlight off)" },
-        Build: {
-          Case: "Anodized Aluminum",
-          Mount: "Gasket Mount",
-          RGB: "South-facing per-key RGB",
+        Акумулятор: { Ємність: "4 000 мА·год", "Час роботи": "До 300 годин (без підсвітки)" },
+        Конструкція: {
+          Корпус: "Анодований алюміній",
+          Кріплення: "Gasket Mount",
+          RGB: "Підсвітка кожної клавіші знизу",
         },
       },
       images: {
@@ -720,11 +720,11 @@ async function main() {
       },
       specs: {
         create: [
-          { key: "Layout", value: "75%", group: "Layout", sortOrder: 1 },
-          { key: "Switch", value: "Keychron K Pro Red (hot-swap)", group: "Switch", sortOrder: 2 },
-          { key: "Connectivity", value: "Bluetooth 5.1 / USB-C", group: "Connectivity", sortOrder: 3 },
-          { key: "Battery", value: "4,000 mAh", group: "Battery", sortOrder: 4 },
-          { key: "Build", value: "Aluminum + Gasket Mount", group: "Build", sortOrder: 5 },
+          { key: "Розкладка", value: "75%", group: "Розкладка", sortOrder: 1 },
+          { key: "Перемикачі", value: "Keychron K Pro Red (гаряча заміна)", group: "Перемикачі", sortOrder: 2 },
+          { key: "Зв'язок", value: "Bluetooth 5.1 / USB-C", group: "Зв'язок", sortOrder: 3 },
+          { key: "Акумулятор", value: "4 000 мА·год", group: "Акумулятор", sortOrder: 4 },
+          { key: "Конструкція", value: "Алюміній + Gasket Mount", group: "Конструкція", sortOrder: 5 },
         ],
       },
     },
@@ -745,7 +745,7 @@ async function main() {
       name: "LG UltraGear 27GP950 4K 144Hz",
       slug: "lg-ultragear-27gp950",
       description:
-        "4K gaming monitor with Nano IPS display, 144Hz refresh rate, and HDMI 2.1 for next-gen gaming.",
+        "Ігровий монітор 4K з Nano IPS дисплеєм, частотою оновлення 144 Гц та HDMI 2.1 для ігор нового покоління.",
       price: 799,
       comparePrice: 899,
       cost: 510,
@@ -759,24 +759,24 @@ async function main() {
       viewCount: 6200,
       purchaseCount: 95,
       specifications: {
-        Panel: { Type: "Nano IPS", Size: '27"', Curvature: "Flat", Coating: "Anti-glare" },
-        Resolution: { Native: "3840 × 2160 (4K UHD)", "Aspect Ratio": "16:9" },
-        Performance: {
-          "Refresh Rate": "144 Hz",
-          "Response Time": "1ms GtG",
+        Панель: { Тип: "Nano IPS", Діагональ: '27"', Вигин: "Пласка", Покриття: "Антиблікове" },
+        "Роздільна здатність": { Нативна: "3840 × 2160 (4K UHD)", "Співвідношення сторін": "16:9" },
+        Продуктивність: {
+          "Частота оновлення": "144 Гц",
+          "Час відгуку": "1 мс GtG",
           HDR: "VESA DisplayHDR 600",
           VRR: "G-Sync Compatible, FreeSync Premium Pro",
         },
-        Ports: {
+        Порти: {
           HDMI: "HDMI 2.1 × 2",
           DisplayPort: "DP 1.4 × 1",
-          "USB-A": "USB 3.0 × 2 (hub)",
+          "USB-A": "USB 3.0 × 2 (хаб)",
         },
-        Ergonomics: {
-          Tilt: "-5° to 15°",
-          "Height Adjust": "110 mm",
-          Swivel: "-20° to 20°",
-          VESA: "100 × 100 mm",
+        Ергономіка: {
+          Нахил: "від -5° до 15°",
+          "Регулювання висоти": "110 мм",
+          Поворот: "від -20° до 20°",
+          VESA: "100 × 100 мм",
         },
       },
       images: {
@@ -787,12 +787,12 @@ async function main() {
       },
       specs: {
         create: [
-          { key: "Panel", value: "Nano IPS", group: "Panel", sortOrder: 1 },
-          { key: "Resolution", value: "3840 × 2160 (4K)", group: "Resolution", sortOrder: 2 },
-          { key: "Refresh Rate", value: "144 Hz", group: "Performance", sortOrder: 3 },
-          { key: "Response Time", value: "1ms GtG", group: "Performance", sortOrder: 4 },
-          { key: "HDR", value: "HDR600", group: "Performance", sortOrder: 5 },
-          { key: "Ports", value: "HDMI 2.1 × 2, DP 1.4, USB-A × 2", group: "Ports", sortOrder: 6 },
+          { key: "Панель", value: "Nano IPS", group: "Панель", sortOrder: 1 },
+          { key: "Роздільна здатність", value: "3840 × 2160 (4K)", group: "Роздільна здатність", sortOrder: 2 },
+          { key: "Частота оновлення", value: "144 Гц", group: "Продуктивність", sortOrder: 3 },
+          { key: "Час відгуку", value: "1 мс GtG", group: "Продуктивність", sortOrder: 4 },
+          { key: "HDR", value: "HDR600", group: "Продуктивність", sortOrder: 5 },
+          { key: "Порти", value: "HDMI 2.1 × 2, DP 1.4, USB-A × 2", group: "Порти", sortOrder: 6 },
         ],
       },
     },
