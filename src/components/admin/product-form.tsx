@@ -108,6 +108,15 @@ export function ProductForm({ categories, product }: ProductFormProps) {
     toast.success("Фото завантажено!")
   }
 
+  const [imageUrlInput, setImageUrlInput] = useState("")
+
+  const addImageByUrl = () => {
+    const url = imageUrlInput.trim()
+    if (!url) return
+    setImages((prev) => [...prev, { url, publicId: "", isPrimary: prev.length === 0 }])
+    setImageUrlInput("")
+  }
+
   const removeImage = (idx: number) => {
     setImages((prev) => {
       const next = prev.filter((_, i) => i !== idx)
@@ -254,7 +263,26 @@ export function ProductForm({ categories, product }: ProductFormProps) {
                   </Button>
                 )}
               </CldUploadWidget>
-            ) : null}
+            ) : (
+              <div className="flex gap-2">
+                <Input
+                  type="url"
+                  placeholder="Посилання на зображення (https://...)"
+                  value={imageUrlInput}
+                  onChange={(e) => setImageUrlInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault()
+                      addImageByUrl()
+                    }
+                  }}
+                />
+                <Button type="button" variant="outline" onClick={addImageByUrl}>
+                  <Plus className="h-4 w-4 mr-2" />
+                  Додати
+                </Button>
+              </div>
+            )}
           </div>
 
           <Separator />
