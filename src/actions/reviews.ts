@@ -30,7 +30,8 @@ export async function createReview(data: z.infer<typeof reviewSchema>) {
     data: { userId: session.user.id, productId, rating, title, comment },
   })
 
-  revalidatePath(`/products/${productId}`)
+  const product = await prisma.product.findUnique({ where: { id: productId }, select: { slug: true } })
+  if (product) revalidatePath(`/products/${product.slug}`)
   return { success: true }
 }
 
@@ -38,7 +39,10 @@ export async function deleteReview(reviewId: string) {
   const session = await auth()
   if (!session?.user?.id) return { error: "Не авторизовано" }
 
-  const review = await prisma.review.findUnique({ where: { id: reviewId } })
+  const review = await prisma.review.findUnique({
+    where: { id: reviewId },
+    include: { product: { select: { slug: true } } },
+  })
   if (!review) return { error: "Не знайдено" }
 
   if (review.userId !== session.user.id && session.user.role !== "ADMIN") {
@@ -46,6 +50,6 @@ export async function deleteReview(reviewId: string) {
   }
 
   await prisma.review.delete({ where: { id: reviewId } })
-  revalidatePath(`/products/${review.productId}`)
+  revalidatePath(`/products/${review.product.slug}`)
   return { success: true }
 }

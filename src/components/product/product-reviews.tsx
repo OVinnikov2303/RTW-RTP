@@ -1,13 +1,14 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { formatDistanceToNow } from "date-fns"
-import { Star, ThumbsUp } from "lucide-react"
+import { Star, ThumbsUp, Trash2 } from "lucide-react"
 import { toast } from "sonner"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -17,7 +18,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Separator } from "@/components/ui/separator"
 import { Progress } from "@/components/ui/progress"
 import { RatingStars } from "./rating-stars"
-import { createReview } from "@/actions/reviews"
+import { createReview, deleteReview } from "@/actions/reviews"
 import { cn } from "@/lib/utils"
 import type { ProductWithRelations } from "@/types"
 
@@ -35,6 +36,7 @@ interface ProductReviewsProps {
 
 export function ProductReviews({ product }: ProductReviewsProps) {
   const { data: session } = useSession()
+  const router = useRouter()
   const [hoverRating, setHoverRating] = useState(0)
   const [submitting, setSubmitting] = useState(false)
 
@@ -69,6 +71,19 @@ export function ProductReviews({ product }: ProductReviewsProps) {
     if (result.error) { toast.error(result.error); return }
     toast.success("Відгук надіслано!")
     reset()
+    router.refresh()
+  }
+
+  const [deletingId, setDeletingId] = useState<string | null>(null)
+
+  const handleDelete = async (reviewId: string) => {
+    if (!confirm("Видалити цей відгук?")) return
+    setDeletingId(reviewId)
+    const result = await deleteReview(reviewId)
+    setDeletingId(null)
+    if (result.error) { toast.error(result.error); return }
+    toast.success("Відгук видалено")
+    router.refresh()
   }
 
   return (
@@ -193,6 +208,17 @@ export function ProductReviews({ product }: ProductReviewsProps) {
                     <span className="text-xs text-muted-foreground ml-auto">
                       {formatDistanceToNow(new Date(review.createdAt), { addSuffix: true })}
                     </span>
+                    {session?.user?.id && (review.user.id === session.user.id || session.user.role === "ADMIN") && (
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(review.id)}
+                        disabled={deletingId === review.id}
+                        className="text-muted-foreground hover:text-destructive transition-colors disabled:opacity-50"
+                        title="Видалити відгук"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    )}
                   </div>
                   <RatingStars rating={review.rating} />
                   {review.title && <p className="font-medium text-sm mt-2">{review.title}</p>}
