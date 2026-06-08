@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { useSession } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -95,6 +96,21 @@ export function ProductReviews({ product }: ProductReviewsProps) {
       <Separator />
 
       {/* Write a review */}
+      {!session?.user && (
+        <div className="rounded-xl border border-dashed border-border p-6 text-center">
+          <p className="text-sm text-muted-foreground">
+            <Link href="/sign-in" className="text-foreground font-medium underline underline-offset-4">
+              Увійдіть до акаунту
+            </Link>
+            , щоб залишити відгук та оцінку
+          </p>
+        </div>
+      )}
+
+      {session?.user && alreadyReviewed && (
+        <p className="text-sm text-muted-foreground">Дякуємо! Ви вже залишили відгук на цей товар.</p>
+      )}
+
       {session?.user && !alreadyReviewed && (
         <>
           <div>
