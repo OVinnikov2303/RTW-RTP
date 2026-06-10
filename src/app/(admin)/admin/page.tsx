@@ -25,7 +25,7 @@ export default async function AdminDashboard() {
     { label: "Загальний дохід", value: formatPrice(stats.totalRevenue), icon: DollarSign, change: "+12% порівняно з минулим місяцем" },
     { label: "Усього замовлень", value: stats.totalOrders.toLocaleString(), icon: ShoppingBag, change: "+8 сьогодні" },
     { label: "Товари", value: stats.totalProducts.toLocaleString(), icon: Package, change: "Активні оголошення" },
-    { label: "Користувачі", value: stats.totalUsers.toLocaleString(), icon: Users, change: "+23 цього тижня" },
+    { label: "Користувачі", value: stats.totalUsers.toLocaleString(), icon: Users, change: stats.newUsersThisWeek > 0 ? `+${stats.newUsersThisWeek} цього тижня` : "Нових немає" },
   ]
 
   return (

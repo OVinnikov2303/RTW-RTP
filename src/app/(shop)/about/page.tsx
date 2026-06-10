@@ -11,10 +11,7 @@ const values = [
 ]
 
 const team = [
-  { name: "Alex Chen", role: "CEO та Співзасновник", image: "https://picsum.photos/seed/alex/200/200" },
-  { name: "Maria Santos", role: "Технічний директор", image: "https://picsum.photos/seed/maria/200/200" },
-  { name: "James Wilson", role: "Керівник відділу продуктів", image: "https://picsum.photos/seed/james/200/200" },
-  { name: "Priya Patel", role: "Підтримка клієнтів", image: "https://picsum.photos/seed/priya/200/200" },
+  { name: "Олег Вінніков", role: "Студент ІТ-23-3", image: "/team/oleh-vinnikov.jpg" },
 ]
 
 export default function AboutPage() {
@@ -72,7 +69,7 @@ export default function AboutPage() {
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-semibold tracking-tight text-center mb-12">Наша команда</h2>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex flex-wrap justify-center gap-6">
             {team.map((member) => (
               <div key={member.name} className="text-center">
                 <div className="relative w-24 h-24 mx-auto rounded-full overflow-hidden bg-muted mb-4 border-2 border-border">

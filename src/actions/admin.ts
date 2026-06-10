@@ -91,11 +91,15 @@ export async function deleteProduct(id: string) {
 export async function getAdminStats() {
   await requireAdmin()
 
-  const [totalRevenue, totalOrders, totalProducts, totalUsers] = await Promise.all([
+  const weekAgo = new Date()
+  weekAgo.setDate(weekAgo.getDate() - 7)
+
+  const [totalRevenue, totalOrders, totalProducts, totalUsers, newUsersThisWeek] = await Promise.all([
     prisma.order.aggregate({ _sum: { total: true } }),
     prisma.order.count(),
     prisma.product.count({ where: { isActive: true } }),
     prisma.user.count(),
+    prisma.user.count({ where: { createdAt: { gte: weekAgo } } }),
   ])
 
   const recentOrders = await prisma.order.findMany({
@@ -131,6 +135,7 @@ export async function getAdminStats() {
     totalOrders,
     totalProducts,
     totalUsers,
+    newUsersThisWeek,
     recentOrders,
     topProducts: topProducts.filter((p) => p.product),
   }

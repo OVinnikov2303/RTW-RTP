@@ -31,16 +31,12 @@ const checkoutSchema = z.object({
 
 type CheckoutFormData = z.infer<typeof checkoutSchema>
 
-const FREE_SHIPPING_THRESHOLD = 0 // UAH — безкоштовна доставка завжди
-const SHIPPING_COST = 0
-
 export default function CheckoutPage() {
   const { data: session } = useSession()
   const { items, totalPrice, clearCart } = useCartStore()
   const [placing, setPlacing] = useState(false)
 
   const subtotal = totalPrice()
-  const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST
 
   const { register, handleSubmit, formState: { errors } } = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutSchema),
@@ -183,7 +179,7 @@ export default function CheckoutPage() {
               </div>
               <div className="flex items-center gap-2.5 text-sm text-muted-foreground">
                 <Truck className="h-4 w-4 shrink-0" />
-                <span>Безкоштовна доставка від {formatPrice(FREE_SHIPPING_THRESHOLD)}</span>
+                <span>Безкоштовна доставка на всі замовлення</span>
               </div>
             </div>
           </div>
@@ -227,13 +223,7 @@ export default function CheckoutPage() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Доставка</span>
-                  <span>
-                    {shipping === 0 ? (
-                      <span className="text-green-600">Безкоштовно</span>
-                    ) : (
-                      formatPrice(shipping)
-                    )}
-                  </span>
+                  <span className="text-green-600">Безкоштовно</span>
                 </div>
               </div>
 
@@ -241,7 +231,7 @@ export default function CheckoutPage() {
 
               <div className="flex justify-between font-semibold text-base mt-4 mb-6">
                 <span>Разом</span>
-                <span>{formatPrice(subtotal + shipping)}</span>
+                <span>{formatPrice(subtotal)}</span>
               </div>
 
               <Button

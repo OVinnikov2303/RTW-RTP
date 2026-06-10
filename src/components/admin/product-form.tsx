@@ -113,6 +113,17 @@ export function ProductForm({ categories, product }: ProductFormProps) {
   const addImageByUrl = () => {
     const url = imageUrlInput.trim()
     if (!url) return
+    try {
+      new URL(url)
+    } catch {
+      toast.error("Введіть коректне посилання на зображення")
+      return
+    }
+    const imageExtensions = /\.(jpg|jpeg|png|webp|gif|avif|svg)(\?.*)?$/i
+    if (!imageExtensions.test(url)) {
+      toast.error("Посилання має вести напряму на файл зображення (.jpg, .png, .webp тощо)")
+      return
+    }
     setImages((prev) => [...prev, { url, publicId: "", isPrimary: prev.length === 0 }])
     setImageUrlInput("")
   }
@@ -202,7 +213,22 @@ export function ProductForm({ categories, product }: ProductFormProps) {
                       />
                     ) : (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={img.url} alt="Фото товару" className="w-full h-full object-cover" />
+                      <img
+                        src={img.url}
+                        alt="Фото товару"
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          const t = e.currentTarget
+                          t.style.display = "none"
+                          const parent = t.parentElement
+                          if (parent && !parent.querySelector(".img-error")) {
+                            const err = document.createElement("div")
+                            err.className = "img-error absolute inset-0 flex flex-col items-center justify-center text-destructive text-[10px] text-center p-1 gap-1"
+                            err.innerHTML = `<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><circle cx='12' cy='12' r='10'/><line x1='12' y1='8' x2='12' y2='12'/><line x1='12' y1='16' x2='12.01' y2='16'/></svg><span>Не вдалося завантажити</span>`
+                            parent.appendChild(err)
+                          }
+                        }}
+                      />
                     )}
 
                     {/* Primary badge */}

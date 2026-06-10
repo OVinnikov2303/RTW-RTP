@@ -5,7 +5,6 @@ import { Footer } from "@/components/layout/footer"
 import { HeroSection } from "@/components/home/hero-section"
 import { CategoriesSection } from "@/components/home/categories-section"
 import { FeaturedProducts } from "@/components/home/featured-products"
-import { PromoBanner } from "@/components/home/promo-banner"
 import { getFeaturedProducts, getNewProducts } from "@/actions/products"
 
 export default async function HomePage() {
@@ -23,7 +22,6 @@ export default async function HomePage() {
         {featured.length > 0 && (
           <FeaturedProducts products={featured} title="Рекомендовані товари" />
         )}
-        <PromoBanner />
         {newProducts.length > 0 && (
           <FeaturedProducts
             products={newProducts}

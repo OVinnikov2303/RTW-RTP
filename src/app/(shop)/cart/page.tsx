@@ -11,8 +11,7 @@ import { formatPrice } from "@/lib/utils"
 export default function CartPage() {
   const { items, updateQuantity, removeItem, totalPrice, totalItems } = useCartStore()
   const subtotal = totalPrice()
-  const shipping = subtotal > 100 ? 0 : 9.99
-  const total = subtotal + shipping
+  const total = subtotal
 
   if (items.length === 0) {
     return (
@@ -102,11 +101,8 @@ export default function CartPage() {
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Доставка</span>
-                <span>{shipping === 0 ? <span className="text-green-600 dark:text-green-400">Безкоштовно</span> : formatPrice(shipping)}</span>
+                <span className="text-green-600 dark:text-green-400">Безкоштовно</span>
               </div>
-              {shipping > 0 && (
-                <p className="text-xs text-muted-foreground">Безкоштовна доставка при замовленні від $100</p>
-              )}
             </div>
             <Separator />
             <div className="flex justify-between font-semibold text-base">

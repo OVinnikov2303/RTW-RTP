@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { auth } from "@/auth"
 import { prisma } from "@/lib/prisma"
 import { createMonobankInvoice } from "@/lib/monobank"
+import { sendNewOrderNotification } from "@/lib/email"
 import { z } from "zod"
 
 const cartItemSchema = z.object({
@@ -101,6 +102,17 @@ export async function POST(req: NextRequest) {
     console.error("Order creation failed:", err)
     return NextResponse.json({ error: "Не вдалося створити замовлення" }, { status: 500 })
   }
+
+  await sendNewOrderNotification({
+    orderId: order.id,
+    shippingName: shippingData.shippingName,
+    shippingEmail: shippingData.shippingEmail,
+    shippingPhone: shippingData.shippingPhone,
+    shippingAddress: shippingData.shippingAddress,
+    shippingCity: shippingData.shippingCity,
+    shippingCountry: shippingData.shippingCountry,
+    total,
+  }).catch((err) => console.error("Order notification email failed:", err))
 
   if (discountId) {
     await prisma.discount.update({

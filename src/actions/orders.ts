@@ -5,6 +5,7 @@ import { auth } from "@/auth"
 import { revalidatePath } from "next/cache"
 import { z } from "zod"
 import type { CartItem } from "@/store/cart-store"
+import { sendNewOrderNotification } from "@/lib/email"
 
 const checkoutSchema = z.object({
   shippingName: z.string().min(2),
@@ -88,6 +89,17 @@ export async function createOrder(
       data: { stock: { decrement: item.quantity } },
     })
   }
+
+  await sendNewOrderNotification({
+    orderId: order.id,
+    shippingName: order.shippingName,
+    shippingEmail: order.shippingEmail,
+    shippingPhone: order.shippingPhone,
+    shippingAddress: order.shippingAddress,
+    shippingCity: order.shippingCity,
+    shippingCountry: order.shippingCountry,
+    total: order.total,
+  })
 
   revalidatePath("/orders")
   return { success: true, orderId: order.id }
